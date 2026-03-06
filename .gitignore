@@ -1,0 +1,20 @@
+# -- Environments --
+.conda/
+envs/*/
+venv/
+
+# -- Python --
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+
+# -- Data --
+data/*
+
+# -- SQL --
+*.sqlite3
+

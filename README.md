@@ -7,11 +7,12 @@
 `The Cancer Microbiome Database (CMD) is a relational database and interactive web application that integrates 16S rRNA microbiome sequencing data with clinical patient metadata from Boston Medical Center (BMC). Built for deployment on the BU bioed-new.bu.edu server, it provides a unified, publicly accessible resource to explore microbiome composition, visualize phylogenetic trees, and track longitudinal shifts in patients' microbiome profiles across cancer treatment timepoints.`
 
 ### Tech Stack
-`Database: MariaDB (SQL)`
 
-### Backend: Python / Flask 
+**Database:** MariaDB (SQL)
 
-### Frontend: HTML, CSS, JavaScript 
+**Backend:** Python / Flask
+
+**Frontend:** HTML, CSS, JavaScript
 
 ### Repository Structure
 

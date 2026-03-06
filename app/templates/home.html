@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- This is where linked CSS files will go -->
+        <title> The Cancer Microbiome Database </title>
+    </head>
+    <body>
+        <h1>Description of Database</h1>
+        <img src="" alt="A fun logo of a cancer cell and a bacteria shaking hands" width="100" height="100">
+
+        <!-- Still don't really understand what this does-->
+        <div id="results">
+            {{results_html | safe}}
+        </div>
+
+        <h1>Form:</h1>
+        <div id="form">
+            <form name="query"></form>
+        </div><br>
+
+        <form name = "query"
+            action="{{url_for('query_response')}}"
+            method="get" >
+        
+            <!-- Choose cancer type -->
+            Cancer:
+            <label for="cancer">Input cancer type:</label>
+            <input type="test" name="cancer" id="cancer">
+            <br>
+
+            <!-- Submit button -->
+            <button type="submit"> Submit query form </button>
+
+        </form>
+    </body>
+</html>

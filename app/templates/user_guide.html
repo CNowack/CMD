@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Usage Guide — CMD{% endblock %}
+
+{% block content %}
+    <h2>Usage Guide</h2>
+
+    <div class="panel">
+        <p>
+            This page explains how to use each section of the Cancer Microbiome
+            Database. Each analysis page has its own form with specific input
+            requirements documented below.
+        </p>
+    </div>
+
+    <h3>Shannon Diversity</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Computes Shannon diversity index per sample or sample group.</p>
+        <p><strong>Input format:</strong> TBD</p>
+        <p><strong>Output:</strong> Bar chart of diversity values, downloadable as CSV.</p>
+    </div>
+
+    <h3>Sankey</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Visualizes patient flow from cancer type through treatment to response.</p>
+        <p><strong>Input format:</strong> TBD</p>
+        <p><strong>Output:</strong> Interactive Sankey diagram.</p>
+    </div>
+
+    <h3>Metagenomic Analysis</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Explores taxonomic abundance across samples and groups.</p>
+        <p><strong>Input format:</strong> TBD</p>
+        <p><strong>Output:</strong> Abundance chart and taxonomy table.</p>
+    </div>
+
+    <h3>PCA</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Dimensionality reduction of ASV abundance data.</p>
+        <p><strong>Input format:</strong> TBD</p>
+        <p><strong>Output:</strong> 2D scatter plot of samples colored by group.</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Sankey — CMD{% endblock %}
+
+{% block head_extra %}
+    <style>
+        /* Sankey-specific tweaks can go here */
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h2>Sankey Diagram</h2>
+
+    <div class="panel">
+        <p>
+            Visualize the flow from <strong>cancer type</strong> to
+            <strong>treatment regimen</strong> to <strong>response outcome</strong>
+            across the BMC cohort.
+        </p>
+    </div>
+
+    <h3>Filter options</h3>
+    <div class="panel">
+        <p><em>Form to be implemented — owner: Cam</em></p>
+        <!--
+            TODO: filter inputs (sample site, timepoint range)
+            TODO: AJAX call to /api/sankey_data
+            TODO: render results via google.visualization.Sankey
+        -->
+    </div>
+
+    <div class="chart-container">
+        <div id="sankey_chart"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        google.charts.load('current', {'packages': ['sankey']});
+        // $(document).ready(function() { ... });
+    </script>
+{% endblock %}

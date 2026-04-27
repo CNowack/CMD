@@ -1,36 +1,36 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- This is where linked CSS files will go -->
-        <title> The Cancer Microbiome Database </title>
-    </head>
-    <body>
-        <h1>Description of Database</h1>
-        <img src="" alt="A fun logo of a cancer cell and a bacteria shaking hands" width="100" height="100">
+{% extends "base.html" %}
 
-        <!-- Still don't really understand what this does-->
-        <div id="results">
-            {{results_html | safe}}
-        </div>
+{% block title %}Home — Cancer Microbiome Database{% endblock %}
 
-        <h1>Form:</h1>
-        <div id="form">
-            <form name="query"></form>
-        </div><br>
+{% block head_extra %}
+    <!-- Page-specific CSS goes here. Keep it minimal — prefer adding to style.css. -->
+    <style>
+        .home-abstract { font-size: 17px; }
+    </style>
+{% endblock %}
 
-        <form name = "query"
-            action="{{url_for('query_response')}}"
-            method="get" >
-        
-            <!-- Choose cancer type -->
-            Cancer:
-            <label for="cancer">Input cancer type:</label>
-            <input type="test" name="cancer" id="cancer">
-            <br>
+{% block content %}
+    <h2>About this database</h2>
+    <div class="panel">
+        <p class="home-abstract">
+            The Cancer Microbiome Database (CMD) integrates 16S rRNA microbiome
+            sequencing data from 547 samples across 142 BMC cancer patients with
+            their clinical metadata, providing a unified resource to explore
+            microbiome composition, visualize phylogenetic relationships, and
+            track longitudinal shifts across treatment timepoints.
+        </p>
+    </div>
 
-            <!-- Submit button -->
-            <button type="submit"> Submit query form </button>
+    <h2>Sankey: Cancer Type &rarr; Treatment &rarr; Response</h2>
+    <div class="chart-container">
+        <div id="sankey_chart"></div>
+    </div>
+{% endblock %}
 
-        </form>
-    </body>
-</html>
+{% block scripts %}
+    <!-- Page-specific JS. AJAX + Google Charts work the same way as in HW5. -->
+    <script>
+        google.charts.load('current', {'packages':['sankey']});
+        // $(document).ready(function(){ ... AJAX call to /sankey_data ... });
+    </script>
+{% endblock %}

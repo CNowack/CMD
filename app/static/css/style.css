@@ -1,0 +1,275 @@
+/* ==========================================================================
+   Cancer Microbiome Database — Shared Stylesheet
+   BF768 Spring 2026 | Cam Nowack, Jack Sherry, Simon Lu
+   ==========================================================================
+   HOW TO USE:
+   - Don't hardcode colors, fonts, or spacing in your page CSS.
+     Use the variables below (e.g. color: var(--color-accent);).
+   - Page-specific styles can go in <style> blocks inside {% block head_extra %}
+     OR in a separate file linked from that block.
+   - If you need a NEW shared style, add it here and tell the team.
+   ========================================================================== */
+
+
+/* ===== 1. Design tokens (change these to re-skin the whole site) ===== */
+:root {
+    /* Colors — pulled from your HW4/HW5 #345 dark-blue accent */
+    --color-bg:           #ffffff;
+    --color-text:         #1a1a1a;
+    --color-muted:        #555555;
+    --color-accent:       #334455;   /* the "#345" from HW4/HW5 table headers */
+    --color-accent-light: #5a7a99;
+    --color-border:       #cccccc;
+    --color-border-dark:  #333333;
+    --color-error:        #cc0000;
+    --color-success:      #2a7a2a;
+    --color-panel-bg:     #f7f7f7;
+
+    /* Typography */
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+    --font-size-base: 16px;
+    --font-size-h1: 28px;
+    --font-size-h2: 22px;
+    --font-size-h3: 18px;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 15px;
+    --space-lg: 20px;
+    --space-xl: 30px;
+
+    /* Layout */
+    --max-content-width: 1200px;
+    --border-radius: 4px;
+}
+
+
+/* ===== 2. Base / reset ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    /* Mirrors HW4: padded headings */
+    padding-left: var(--space-md);
+    margin: var(--space-md) 0;
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+
+p { padding-left: var(--space-md); }
+
+
+/* ===== 3. Site header / nav / footer ===== */
+.site-header {
+    background-color: var(--color-accent);
+    color: white;
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.site-header h1 {
+    color: white;
+    padding-left: 0;
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.site-header .tagline {
+    padding-left: 0;
+    margin: 0;
+    color: #d0d0d0;
+    font-style: italic;
+}
+
+.site-nav {
+    margin-top: var(--space-md);
+}
+
+/* Top-level horizontal nav list */
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.nav-item {
+    position: relative;       /* anchor for absolutely-positioned dropdowns */
+}
+
+.nav-item > a {
+    color: white;
+    text-decoration: none;
+    padding: var(--space-xs) var(--space-sm);
+    border-bottom: 2px solid transparent;
+    display: inline-block;
+}
+
+.nav-item > a:hover,
+.nav-dropdown:hover > a {
+    border-bottom-color: white;
+}
+
+/* Dropdown menus — hidden by default, shown on hover/focus */
+.nav-dropdown-menu {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-xs) 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-accent-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+    /* Hidden by default. Using visibility instead of display:none
+       so transitions still work and so it's keyboard-focusable. */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    z-index: 100;
+}
+
+.nav-dropdown:hover > .nav-dropdown-menu,
+.nav-dropdown:focus-within > .nav-dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav-dropdown-menu li a {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: white;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.nav-dropdown-menu li a:hover {
+    background-color: var(--color-accent-light);
+}
+
+.site-main {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: var(--space-lg);
+}
+
+.site-footer {
+    background-color: var(--color-panel-bg);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 14px;
+    margin-top: var(--space-xl);
+}
+
+.site-footer p {
+    padding-left: 0;
+    margin: var(--space-xs) 0;
+}
+
+
+/* ===== 4. Reusable components ===== */
+
+/* Bordered content panel — like the green-bordered form box in your HW3 */
+.panel {
+    border: 3px solid var(--color-accent);
+    padding: var(--space-lg);
+    margin: var(--space-md) 0;
+    border-radius: var(--border-radius);
+}
+
+/* Forms */
+form label {
+    display: inline-block;
+    margin-right: var(--space-sm);
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], select {
+    font-size: var(--font-size-base);
+    padding: var(--space-xs);
+    margin: var(--space-xs) 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+button, input[type="submit"] {
+    /* Pulled from HW4 reset-button styling */
+    background-color: var(--color-border-dark);
+    color: white;
+    font-size: var(--font-size-base);
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--color-accent);
+}
+
+/* Tables — pulled from HW4/HW5 table conventions */
+table {
+    margin: var(--space-lg);
+    border-collapse: collapse;
+    font-size: var(--font-size-h3);
+}
+
+table, th, td {
+    border: 2px solid black;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+/* Messages */
+.error-message {
+    color: var(--color-error);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-h3);
+    padding: var(--space-md);
+    border-left: 4px solid var(--color-error);
+    background-color: #fff5f5;
+    margin: var(--space-md);
+}
+
+.summary-message {
+    padding: var(--space-md);
+    border-left: 4px solid var(--color-accent);
+    background-color: var(--color-panel-bg);
+    margin: var(--space-md);
+}
+
+
+/* ===== 5. Chart containers ===== */
+.chart-container {
+    margin: var(--space-lg);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: white;
+}

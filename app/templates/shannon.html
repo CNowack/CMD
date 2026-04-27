@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Shannon Diversity — CMD{% endblock %}
+
+{% block content %}
+    <h2>Shannon Diversity Index</h2>
+
+    <div class="panel">
+        <p>
+            The Shannon diversity index quantifies microbial diversity within
+            a sample, accounting for both species richness and evenness.
+            Higher values indicate more diverse microbial communities.
+        </p>
+    </div>
+
+    <h3>Query form</h3>
+    <div class="panel">
+        <p><em>Form to be implemented — owner: TBD</em></p>
+        <!--
+            TODO: form inputs for sample site, cancer type, timepoint
+            TODO: AJAX call to /api/shannon_data
+            TODO: render results in #shannon_chart
+        -->
+    </div>
+
+    <div class="chart-container">
+        <div id="shannon_chart"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Cancer Microbiome Database{% endblock %}</title>
+
+    <!-- Shared site CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- jQuery + Google Charts (same versions as HW5) -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Per-page extra head content (page-specific CSS, chart packages, etc.) -->
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+
+    <!-- ===== Site header: same on every page ===== -->
+    <header class="site-header">
+        <div class="site-title">
+            <h1>Cancer Microbiome Database</h1>
+            <p class="tagline">Integrating 16S rRNA microbiome data with BMC clinical metadata</p>
+        </div>
+
+        <nav class="site-nav">
+            <ul class="nav-list">
+
+                <!-- Home -->
+                <li class="nav-item">
+                    <a href="{{ url_for('home') }}">Home</a>
+                </li>
+
+                <!-- Analysis dropdown -->
+                <li class="nav-item nav-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Analysis &#9662;</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="{{ url_for('shannon') }}">Shannon Diversity</a></li>
+                        <li><a href="{{ url_for('sankey') }}">Sankey</a></li>
+                        <li><a href="{{ url_for('metagenomic') }}">Metagenomic Analysis</a></li>
+                        <li><a href="{{ url_for('pca') }}">PCA</a></li>
+                    </ul>
+                </li>
+
+                <!-- Help dropdown -->
+                <li class="nav-item nav-dropdown">
+                    <a href="#" class="nav-dropdown-toggle">Help &#9662;</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="{{ url_for('usage_guide') }}">Usage Guide</a></li>
+                        <li><a href="{{ url_for('example_queries') }}">Example Queries</a></li>
+                        <li><a href="{{ url_for('license_page') }}">License</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== Page content goes here ===== -->
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ===== Footer: required attribution per Benson eval #2 ===== -->
+    <footer class="site-footer">
+        <p>
+            Developed at Boston University as part of BF768, Spring 2026,
+            G. Benson instructor.
+        </p>
+        <p>
+            Student developers: Cam Nowack, Jack Sherry, Simon Lu &middot;
+            Faculty advisor: Chao Zhang (Computational Biomedicine)
+        </p>
+    </footer>
+
+    <!-- Per-page scripts -->
+    {% block scripts %}{% endblock %}
+</body>
+</html>

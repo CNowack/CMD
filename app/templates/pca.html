@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}PCA — CMD{% endblock %}
+
+{% block content %}
+    <h2>Principal Component Analysis</h2>
+
+    <div class="panel">
+        <p>
+            PCA reduces the high-dimensional ASV abundance data into two or
+            three principal components, allowing visualization of how samples
+            cluster by cancer type, treatment response, or timepoint.
+        </p>
+    </div>
+
+    <h3>Query form</h3>
+    <div class="panel">
+        <p><em>Form to be implemented — owner: TBD</em></p>
+        <!--
+            TODO: grouping variable selector (color by: cancer type / response / site)
+            TODO: AJAX call to a /api/pca_data endpoint
+            TODO: render scatter plot
+        -->
+    </div>
+
+    <div class="chart-container">
+        <div id="pca_chart"></div>
+    </div>
+{% endblock %}

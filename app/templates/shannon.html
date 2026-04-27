@@ -2,6 +2,23 @@
 
 {% block title %}Shannon Diversity — CMD{% endblock %}
 
+{% block head_extra %}
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <style>
+        #selected-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .cancer-chip {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #ddeeff; border: 1px solid #88aacc;
+            border-radius: 16px; padding: 4px 12px; font-size: 0.9em;
+        }
+        .chip-remove {
+            background: none; border: none; cursor: pointer;
+            font-size: 1em; color: #555; line-height: 1;
+        }
+        .chip-remove:hover { color: #c00; }
+    </style>
+{% endblock %}
+
 {% block content %}
     <h2>Shannon Diversity Index</h2>
 
@@ -13,17 +30,178 @@
         </p>
     </div>
 
-    <h3>Query form</h3>
+    <h3>Select Cancer Types to Compare</h3>
     <div class="panel">
-        <p><em>Form to be implemented — owner: TBD</em></p>
-        <!--
-            TODO: form inputs for sample site, cancer type, timepoint
-            TODO: AJAX call to /api/shannon_data
-            TODO: render results in #shannon_chart
-        -->
+        <p>Select up to 5 cancer types. Each will appear as a violin on the plot.</p>
+        <select id="cancer-select">
+            <option value="">-- Choose a cancer type --</option>
+            <option>Hepatocellular Carcinoma</option>
+            <option>Skin Carcinoma</option>
+            <option>Sarcoma</option>
+            <option>Small Cell Lung Carcinoma</option>
+            <option>Tongue Cancer</option>
+            <option>NSCLC</option>
+            <option>Melanoma</option>
+            <option>Kidney Carcinoma</option>
+            <option>SCC Anal</option>
+            <option>Hypopharyngeal Cancer</option>
+            <option>Tonsil cancer</option>
+            <option>Pancreatic Carcinoma</option>
+            <option>Gastric Carcinoma</option>
+            <option>Uterine Carcinoma</option>
+            <option>Oral Cavity</option>
+            <option>Colon Carcinoma</option>
+            <option>Breast Carcinoma</option>
+            <option>Bladder Carcinoma</option>
+            <option>PEComa</option>
+            <option>Neuroendocrine Carcinoma</option>
+            <option>Nasalpharyngeal Cancer</option>
+            <option>Renal Cell Carcinoma</option>
+            <option>Prostate Cancer</option>
+            <option>Cervical Carcinoma</option>
+            <option>Esophageal Cancer</option>
+            <option>Ampullar Cancer</option>
+            <option>Maxillary Sinus Cancer</option>
+            <option>SCC Oropharynx</option>
+            <option>Merkel Cell Carcinoma</option>
+            <option>SCC Nasal Cavity</option>
+            <option>SCC of Gingiva</option>
+            <option>Hodgkin's Lymphoma</option>
+            <option>SCC of Scalp</option>
+            <option>Vaginal Carcinoma</option>
+            <option>Colorecral Cancer</option>
+            <option>Large Cell Neuroendocrine</option>
+            <option>Adrenal</option>
+        </select>
+        <button onclick="addCancerType()">Add</button>
     </div>
 
-    <div class="chart-container">
-        <div id="shannon_chart"></div>
+    <div id="selected-chips"></div>
+
+    <div style="margin: 10px 0;">
+        <label for="index-select"><strong>Diversity index:</strong></label>
+        <select id="index-select" onchange="switchIndex()">
+            <option value="shannon">Shannon Index</option>
+            <option value="simpson">Simpson Index</option>
+        </select>
     </div>
+
+    <div id="violin-plot"></div>
+
+    <div id="shannon-results-table"></div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // selectedData maps cancer_type string -> array of row arrays from the API
+        var selectedData = {};
+
+        function currentIndex() {
+            return $('#index-select').val();
+        }
+
+        function fetchType(type, callback) {
+            $.get('/api/cancer_diversity_search', {cancer_type: type, index_type: currentIndex()}, function(data) {
+                callback(null, data);
+            }, 'json').fail(function() {
+                callback('error');
+            });
+        }
+
+        function addCancerType() {
+            var type = $('#cancer-select').val();
+            if (!type) { alert('Please choose a cancer type.'); return; }
+            if (selectedData.hasOwnProperty(type)) {
+                alert('"' + type + '" is already on the plot.'); return;
+            }
+            if (Object.keys(selectedData).length >= 5) {
+                alert('Maximum of 5 cancer types can be compared at once. Remove one first.'); return;
+            }
+
+            fetchType(type, function(err, data) {
+                if (err || !data || data.length === 0) {
+                    alert('No data found for "' + type + '".');
+                    return;
+                }
+                selectedData[type] = data;
+                addChip(type);
+                updatePlot();
+                updateTable();
+            });
+        }
+
+        function switchIndex() {
+            var types = Object.keys(selectedData);
+            if (types.length === 0) return;
+            var remaining = types.length;
+            types.forEach(function(type) {
+                fetchType(type, function(err, data) {
+                    if (!err && data && data.length > 0) {
+                        selectedData[type] = data;
+                    }
+                    remaining--;
+                    if (remaining === 0) { updatePlot(); updateTable(); }
+                });
+            });
+        }
+
+        function addChip(type) {
+            var chip = $('<span class="cancer-chip"></span>').text(type).attr('data-type', type);
+            var btn = $('<button class="chip-remove" title="Remove">\u00d7</button>').on('click', function() {
+                removeType(type);
+            });
+            chip.append(btn);
+            $('#selected-chips').append(chip);
+        }
+
+        function removeType(type) {
+            delete selectedData[type];
+            $('#selected-chips span[data-type="' + type + '"]').remove();
+            updatePlot();
+            updateTable();
+        }
+
+        function updatePlot() {
+            var types = Object.keys(selectedData);
+            if (types.length === 0) {
+                Plotly.purge('violin-plot');
+                return;
+            }
+            var indexLabel = currentIndex() === 'simpson' ? 'Simpson Index (D)' : 'Shannon Index (H)';
+            var traces = types.map(function(type) {
+                return {
+                    type: 'violin',
+                    name: type,
+                    y: selectedData[type].map(function(row) { return row[4]; }),
+                    box: { visible: true },
+                    meanline: { visible: true },
+                    points: 'all',
+                    jitter: 0.3,
+                    pointpos: 0,
+                    hoveron: 'violins+kde'
+                };
+            });
+            Plotly.newPlot('violin-plot', traces, {
+                title: indexLabel + ' by Cancer Type',
+                yaxis: { title: indexLabel },
+                xaxis: { title: 'Cancer Type' }
+            });
+        }
+
+        function updateTable() {
+            var types = Object.keys(selectedData);
+            if (types.length === 0) {
+                $('#shannon-results-table').empty();
+                return;
+            }
+            var html = '<table border="1"><tr><th>Patient ID</th><th>Cancer Type</th><th>Cancer Category</th><th>Response Status</th><th>Index</th></tr>';
+            types.forEach(function(type) {
+                selectedData[type].forEach(function(row) {
+                    html += '<tr><td>' + row[0] + '</td><td>' + row[1] + '</td><td>' + row[2] + '</td><td>' + row[3] + '</td><td>' + row[4] + '</td></tr>';
+                });
+            });
+            html += '</table>';
+            $('#shannon-results-table').html(html);
+        }
+    </script>
 {% endblock %}

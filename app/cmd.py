@@ -106,11 +106,38 @@ def api_sankey_data():
     return jsonify([])
 
 
-@app.route("/api/shannon_data", methods=["GET"])
-def api_shannon_data():
-    """Returns Shannon diversity values per sample/group."""
-    # TODO
-    return jsonify([])
+@app.route("/api/cancer_diversity_search", methods=["GET"])
+def api_cancer_diversity_search():
+    """Returns per-patient diversity scores for a given cancer type (shannon.html).
+    Params:
+        cancer_type  -- partial match against Patient.cancer_type
+        index_type   -- 'shannon' (default) or 'simpson'
+    """
+    cancer_type = request.args.get("cancer_type", "").strip()
+    index_type  = request.args.get("index_type", "shannon").strip()
+    if not cancer_type:
+        return jsonify([])
+
+    if index_type == "simpson":
+        score_expr = "ROUND(1 - SUM(o.relative_abundance * o.relative_abundance), 4)"
+    else:
+        score_expr = "ROUND(-SUM(o.relative_abundance * LOG(o.relative_abundance)), 4)"
+
+    conn, cursor = get_db_connection()
+    cursor.execute(
+        f"SELECT p.bbid, p.cancer_type, p.cancer_category, p.response_status, "
+        f"{score_expr} AS diversity_score "
+        "FROM Patient p "
+        "JOIN Sample s ON p.bbid = s.bbid "
+        "JOIN Observation o ON s.sid = o.sid "
+        "WHERE p.cancer_type LIKE ? AND o.relative_abundance > 0 "
+        "GROUP BY p.bbid, p.cancer_type, p.cancer_category, p.response_status",
+        (f"%{cancer_type}%",)
+    )
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify([[row[0], row[1], row[2], row[3], row[4]] for row in rows])
 
 
 # ===========================================================================
@@ -122,14 +149,13 @@ def api_shannon_data():
 def get_db_connection():
     """
     Returns a (connection, cursor) pair. Caller is responsible for closing
-    both. We disable autocommit so we can wrap multi-step writes in a
-    transaction later if needed.
+    both.
     """
     connection = mariadb.connect(
         host="bioed-new.bu.edu",
-        user="cnowack",          # TODO: replace with shared team account
-        password="REPLACE_ME",   # TODO: load from env var, never commit
-        db="cmd",                # TODO: confirm final DB name with team
+        user="jgsherry",
+        password="jgsherry",
+        db="Team13",
         port=4253,
     )
     connection.autocommit = False
@@ -148,4 +174,4 @@ def get_db_connection():
 # when something crashes. Turn it OFF in production — it's a security hole.
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8073)

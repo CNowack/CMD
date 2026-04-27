@@ -2,51 +2,53 @@
 
 {% block title %}Home — Cancer Microbiome Database{% endblock %}
 
-{% block head_extra %}
-    <!-- Page-specific CSS goes here. Keep it minimal — prefer adding to style.css. -->
-    <style>
-        .home-abstract { font-size: 17px; }
-    </style>
-{% endblock %}
-
 {% block content %}
-    <h2>About this database</h2>
+    <h2>Welcome to the Cancer Microbiome Database</h2>
+
     <div class="panel">
-        <p class="home-abstract">
-            The Cancer Microbiome Database (CMD) integrates 16S rRNA microbiome
-            sequencing data from 547 samples across 142 BMC cancer patients with
-            their clinical metadata, providing a unified resource to explore
-            microbiome composition, visualize phylogenetic relationships, and
-            track longitudinal shifts across treatment timepoints.
+        <h3>About this project</h3>
+        <p>
+            The <strong>Cancer Microbiome Database (CMD)</strong> is a relational
+            database and interactive web application that integrates 16S rRNA
+            microbiome sequencing data with clinical patient metadata from
+            Boston Medical Center (BMC). It provides a unified, publicly
+            accessible resource to explore microbiome composition, visualize
+            phylogenetic relationships, and track longitudinal shifts in
+            patients' microbiome profiles across cancer treatment timepoints.
+        </p>
+        <p>
+            The database contains data from <strong>547 samples</strong>
+            collected from <strong>142 BMC cancer patients</strong> across
+            three anatomical sites (buccal, stool, nasal) over multiple
+            timepoints since 2019.
         </p>
     </div>
-=======
-        <form name = "query"
-            action="{{url_for('query_response')}}"
-            method="get" >
-        
-            <!-- Choose a cancer type -->
-            Cancer:
-            <label for="cancer">Input cancer type:</label>
-            <input type="test" name="cancer" id="cancer">
-            <br>
->>>>>>> 9c543574bc1e7023a970e461c58dddddb2630334
 
-    <h2>Sankey: Cancer Type &rarr; Treatment &rarr; Response</h2>
+    <div class="panel">
+        <h3>Project information</h3>
+        <p><strong>Student developers:</strong> Cam Nowack, Jack Sherry, Simon Lu</p>
+        <p><strong>Faculty advisor:</strong> Chao Zhang, Computational Biomedicine Department</p>
+        <p>
+            This project was developed at Boston University as part of
+            <strong>BF768: Biological Databases</strong>, Spring 2026,
+            G. Benson instructor.
+        </p>
+    </div>
+
+    <h2>Featured visualization</h2>
+    <p>
+        The Sankey diagram below summarizes how cancer types in our cohort
+        flow through treatment regimens to response outcomes.
+    </p>
     <div class="chart-container">
-        <div id="sankey_chart"></div>
+        <div id="sankey_preview"></div>
     </div>
 {% endblock %}
 
 {% block scripts %}
-    <!-- Page-specific JS. AJAX + Google Charts work the same way as in HW5. -->
     <script>
-        google.charts.load('current', {'packages':['sankey']});
-        // $(document).ready(function(){ ... AJAX call to /sankey_data ... });
+        // Sankey preview will be wired up to /api/sankey_data via AJAX.
+        // Stubbed for now — Cam to implement.
+        google.charts.load('current', {'packages': ['sankey']});
     </script>
 {% endblock %}
-=======
-        </form>
-    </body>
-</html>
->>>>>>> 9c543574bc1e7023a970e461c58dddddb2630334

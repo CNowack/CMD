@@ -20,6 +20,17 @@
             track longitudinal shifts across treatment timepoints.
         </p>
     </div>
+=======
+        <form name = "query"
+            action="{{url_for('query_response')}}"
+            method="get" >
+        
+            <!-- Choose a cancer type -->
+            Cancer:
+            <label for="cancer">Input cancer type:</label>
+            <input type="test" name="cancer" id="cancer">
+            <br>
+>>>>>>> 9c543574bc1e7023a970e461c58dddddb2630334
 
     <h2>Sankey: Cancer Type &rarr; Treatment &rarr; Response</h2>
     <div class="chart-container">
@@ -34,3 +45,8 @@
         // $(document).ready(function(){ ... AJAX call to /sankey_data ... });
     </script>
 {% endblock %}
+=======
+        </form>
+    </body>
+</html>
+>>>>>>> 9c543574bc1e7023a970e461c58dddddb2630334

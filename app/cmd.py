@@ -14,24 +14,7 @@ import mariadb
 import os
 from dotenv import load_dotenv
 
-# ---------------------------------------------------------------------------
-# App initialization
-# ---------------------------------------------------------------------------
-# `Flask(__name__)` creates the application object. The __name__ argument
-# tells Flask where to look for templates (the `templates/` folder) and
-# static assets like CSS/JS (the `static/` folder), relative to this file.
 app = Flask(__name__)
-
-
-# ===========================================================================
-# SECTION 1: PAGE ROUTES (HTML pages the user navigates to)
-# ===========================================================================
-# Each function below is a "view function" — Flask calls it when a user's
-# browser requests the matching URL. The @app.route(...) line above each
-# function is a "decorator" that registers the URL path.
-#
-# The function NAME (e.g. `home`) is what `url_for('home')` in the Jinja
-# templates resolves to. If you rename a function, update base.html too.
 
 @app.route("/", methods=["GET"])
 def home():
@@ -91,15 +74,9 @@ def license_page():
     return render_template("license.html")
 
 
-# ===========================================================================
-# SECTION 2: AJAX / JSON ENDPOINTS (data the JavaScript fetches)
-# ===========================================================================
-# These don't render HTML — they return JSON. The frontend JavaScript
-# (jQuery $.get in our case) calls them in the background to load chart
-# data WITHOUT a full page reload. This is the AJAX requirement (evalue #10).
-#
-# We'll fill these in as each analysis page is built. Stubs for now so the
-# routes exist and don't 404.
+#===============================================================#
+#       Cam - Sankey Plots                                      #
+#===============================================================#
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 SQL_DIR  = os.path.join(APP_ROOT, "..", "db")
@@ -114,47 +91,94 @@ def load_sql(filename):
 
 @app.route("/api/sankey_data", methods=["GET"])
 def api_sankey_data():
-    """
-    Returns Sankey data: list of [source, target, valueue] triples.
-    Aggregates ASV counts across taxonomic ranks: Phylum -> Class -> Order -> Family.
-    """
-
     load_dotenv()
-    # set username and password
     db_usr = os.environ.get("DB_USR")
-    db_pw = os.environ.get("DB_PW")
-    if request.args:
-        # Get the sid from request.args
-        sid = request.args.get('sid')
-        if sid != "":
-            # The query is identical to db/sankey_query.sql. Kept inline for now;
-            # could be moved to a .sql file and read in if it grows.
-            query = load_sql("sankey.sql")
-            params = (sid, sid, sid)
+    db_pw  = os.environ.get("DB_PW")
 
-            connection, cursor = None, None
-            try:
-                connection = mariadb.connect(
-                    host = 'bioed-new.bu.edu',
-                    user = db_usr,
-                    password = db_pw,
-                    db = 'Team13',
-                    port = 4253)
-                
-                cursor = connection.cursor()
-                cursor.execute(query, params)
-                rows = cursor.fetchall()
-                # convert tuples to list
-                results = [[source, target, int(value)] for source, target, value in rows]
-                return jsonify(results)
-            except mariadb.Error as e:
-                return jsonify({"error": str(e)}), 500
-            finally:
-                if cursor:   cursor.close()
-                if connection: connection.close()
-        return jsonify("")
-    return jsonify("")
+    # Map filter_type -> (sql filename, param value)
+    filter_type = request.args.get("filter_type")
+    filter_value = request.args.get("filter_value")
 
+    sql_file_map = {
+        "sid":         "sankey_sid.sql",
+        "cancer_type": "sankey_cancer.sql",
+        "treatment":   "sankey_treatment.sql",
+        "sample_type": "sankey_sample.sql"
+    }
+
+    if filter_type not in sql_file_map:
+        return jsonify({"error": "Invalid filter_type"}), 400
+    if not filter_value:
+        return jsonify({"error": "filter_value is required"}), 400
+
+    query = load_sql(sql_file_map[filter_type])
+    # 4 taxonomic levels -> repeat param 4 times
+    stage_count_map = {
+    "sid":         4,   # phylum -> class -> order -> family -> genus
+    "cancer_type": 3,   # phylum -> class -> order -> family
+    "treatment":   3,
+    "sample_type": 3
+    }
+    params = (filter_value,) * stage_count_map[filter_type]
+
+    connection, cursor = None, None
+    import mysql.connector
+    try:
+        connection = mysql.connector.connect(
+            host="127.0.0.1",
+            user=db_usr,
+            password=db_pw,
+            database="Team13",
+            port=3307,
+            use_pure=True,
+        )
+        cursor = connection.cursor()
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        results = [[src, tgt, int(val)] for src, tgt, val in rows]
+        return jsonify(results)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        if cursor:     cursor.close()
+        if connection: connection.close()
+
+@app.route("/api/filter_options", methods=["GET"])
+def api_filter_options():
+    load_dotenv()
+    db_usr = os.environ.get("DB_USR")
+    db_pw  = os.environ.get("DB_PW")
+
+    query = load_sql("sankey_dropdown_values.sql")
+
+    connection, cursor = None, None
+    import mysql.connector
+    try:
+        connection = mysql.connector.connect(
+            host="127.0.0.1", 
+            user=db_usr, 
+            password=db_pw,
+            database="Team13", 
+            port=3307, 
+            use_pure=True,
+        )
+        cursor = connection.cursor()
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        options = {}
+        for filter_name, value in rows:
+            options.setdefault(filter_name, []).append(value)
+        return jsonify(options)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        if cursor:     cursor.close()
+        if connection: connection.close()
+
+
+#===============================================================#
+#       Jack - Shannon Diveristy plots                          #
+#===============================================================#
 
 @app.route("/api/cancer_diversity_search", methods=["GET"])
 def api_cancer_diversity_search():
@@ -190,12 +214,6 @@ def api_cancer_diversity_search():
     return jsonify([[row[0], row[1], row[2], row[3], row[4]] for row in rows])
 
 
-# ===========================================================================
-# SECTION 3: DATABASE HELPER (centralize the connection logic)
-# ===========================================================================
-# Pulled from HW3/HW5 pattern. Once we deploy to bioed-new, host/port/user
-# will change — having one function means we update in one place.
-
 def get_db_connection():
     """
     Returns a (connection, cursor) pair. Caller is responsible for closing
@@ -212,16 +230,6 @@ def get_db_connection():
     cursor = connection.cursor()
     return connection, cursor
 
-
-# ===========================================================================
-# SECTION 4: APP STARTUP
-# ===========================================================================
-# `if __name__ == '__main__'` means: only run the dev server when this file
-# is executed directly (`python cmd.py`). When deployed on bioed-new under
-# Apache/WSGI, that server imports this file but does NOT run this block.
-#
-# debug=True gives auto-reload on file save and a browser-based debugger
-# when something crashes. Turn it OFF in production — it's a security hole.
 
 if __name__ == "__main__":
     app.run(debug=True, port=8073)

@@ -12,11 +12,40 @@
             font-style: italic;
             color: var(--color-muted);
         }
-        #sid_input {
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+        .filter-grid label {
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+        }
+        .filter-grid select {
             font-size: var(--font-size-base);
             padding: var(--space-xs);
-            width: 250px;
+            margin-top: var(--space-xs);
         }
+
+        .sankey-wrapper {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .rank-labels {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--space-sm) 0 var(--space-md) 0;
+            padding: 0 var(--space-md);
+            font-weight: bold;
+            color: var(--color-accent);
+            font-size: 16px;
+        }
+        .rank-labels span { text-align: center; flex: 1; }
+        .rank-labels.hidden { display: none; }
     </style>
 {% endblock %}
 
@@ -25,107 +54,156 @@
 
     <div class="panel">
         <p>
-            This Sankey diagram shows the flow of ASVs through the taxonomic
-            hierarchy: <strong>Phylum &rarr; Class &rarr; Order &rarr; Family</strong>
-            for a single sample. Each ribbon's width is proportional to the
-            number of distinct ASVs assigned to that lineage.
-        </p>
-        <p>
-            Enter a sample ID below (e.g. <code>103-buccal-10_27_20</code>) to render its
-            taxonomic profile.
+            Choose a filter type, then a value. Only one filter runs at a time.
         </p>
     </div>
 
-    <h3>Sample selection</h3>
+    <h3>Filter</h3>
     <div class="panel">
-        <label for="sid_input">Sample ID:</label>
-        <input type="text" id="sid_input" placeholder="e.g. '103-buccal-10_27_20'">
+        <div class="filter-grid">
+            <label>
+                Filter by
+                <select id="filter_type">
+                    <option value="sid">Sample ID</option>
+                    <option value="cancer_type">Cancer type</option>
+                    <option value="treatment">Treatment</option>
+                    <option value="sample_type">Sample type</option>
+                </select>
+            </label>
+            <label>
+                Value
+                <select id="filter_value">
+                    <option value="">(choose)</option>
+                </select>
+            </label>
+        </div>
         <button id="render_button">Render Sankey</button>
     </div>
 
     <h3>Diagram</h3>
     <div class="chart-container">
-        <div id="status_message">Enter a sample ID above to begin.</div>
-        <div id="sankey_chart"></div>
+        <div id="status_message">Choose a filter and click Render.</div>
+
+        <div class="sankey-wrapper">
+            <div id="sankey_chart"></div>
+            <div id="rank_labels" class="rank-labels hidden">
+                <span>Phylum</span>
+                <span>Class</span>
+                <span>Order</span>
+                <span>Family</span>
+                <span id="genus_label">Genus</span>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
-        // Load the Sankey package once on page load. The chart only renders
-        // when the user clicks the button.
         google.charts.load('current', {'packages': ['sankey']});
 
-        $(document).ready(function() {
-            $("#render_button").click(function() {
-                fetchSankeyData();
-            });
+        let filterOptions = {};  // populated on page load
 
-            // Quality-of-life: pressing Enter in the input also triggers fetch.
-            $("#sid_input").keypress(function(e) {
-                if (e.which === 13) { fetchSankeyData(); }
-            });
+        $(document).ready(function() {
+            populateFilterOptions();
+
+            // When filter type changes, repopulate the value dropdown
+            $("#filter_type").change(updateValueDropdown);
+
+            $("#render_button").click(fetchSankeyData);
         });
 
+        function populateFilterOptions() {
+            $.get(
+                "{{ url_for('api_filter_options') }}",
+                function(options) {
+                    if (options.error) {
+                        $("#status_message").text("Couldn't load filters: " + options.error);
+                        return;
+                    }
+                    filterOptions = options;
+                    updateValueDropdown();
+                },
+                "json"
+            ).fail(function() {
+                $("#status_message").text("Failed to load filter options.");
+            });
+        }
+
+        function updateValueDropdown() {
+            const filterType = $("#filter_type").val();
+            const values = filterOptions[filterType] || [];
+            const select = $("#filter_value");
+            select.empty().append($("<option>").val("").text("(choose)"));
+            values.forEach(v => select.append($("<option>").val(v).text(v)));
+        }
+
         function fetchSankeyData() {
-            const sid = $("#sid_input").val().trim();
-            if (sid === "") {
-                alert("Please enter a sample ID.");
+            const filterType = $("#filter_type").val();
+            const filterValue = $("#filter_value").val();
+            if (!filterValue) {
+                alert("Please choose a value.");
                 return;
             }
 
-            // Clear previous chart and show loading state.
             $("#sankey_chart").empty();
-            $("#status_message").text("Loading data for " + sid + "...").show();
+            $("#rank_labels").addClass("hidden");
+            $("#status_message").text("Loading data...").show();
 
-            // jQuery serializes the second arg into the URL as ?sid=...
             $.get(
                 "{{ url_for('api_sankey_data') }}",
-                { sid: sid },
-                function(data) { handleSankeyResponse(data, sid); },
+                { filter_type: filterType, filter_value: filterValue },
+                function(data) { handleSankeyResponse(data, filterType); },
                 "json"
             ).fail(function(jqXHR) {
-                // jqXHR.responseJSON exists if the server returned a JSON error body.
                 const msg = jqXHR.responseJSON && jqXHR.responseJSON.error
-                          ? jqXHR.responseJSON.error
-                          : "Request failed (HTTP " + jqXHR.status + ")";
+                        ? jqXHR.responseJSON.error
+                        : "Request failed (HTTP " + jqXHR.status + ")";
                 $("#status_message").text("Error: " + msg);
             });
         }
 
-        function handleSankeyResponse(data, sid) {
+        function handleSankeyResponse(data, filterType) {
             if (data.error) {
                 $("#status_message").text("Database error: " + data.error);
                 return;
             }
             if (!Array.isArray(data) || data.length === 0) {
-                $("#status_message").text("No taxonomy data found for sample " + sid + ".");
+                $("#status_message").text("No taxonomy data found.");
                 return;
             }
-
             $("#status_message").hide();
-            drawSankey(data);
+            drawSankey(data, filterType);
         }
 
-        function drawSankey(rows) {
+        function drawSankey(rows, filterType) {
             const chartData = [['From', 'To', 'Count']].concat(rows);
             const dataTable = google.visualization.arrayToDataTable(chartData);
 
+            const sources = new Set(rows.map(r => r[0]));
+            const targets = new Set(rows.map(r => r[1]));
+            const leafNodes = [...targets].filter(t => !sources.has(t));
+            const dynamicHeight = Math.min(4000, Math.max(600, leafNodes.length * 22));
+
             const options = {
                 width: 1000,
-                height: 600,
+                height: dynamicHeight,
                 sankey: {
-                    node: {
-                        label: { fontSize: 12 },
-                        nodePadding: 8,
-                    },
+                    node: { label: { fontSize: 12 }, nodePadding: 6 },
                     link: { colorMode: 'gradient' },
                 },
             };
-
             const chart = new google.visualization.Sankey(
                 document.getElementById('sankey_chart')
             );
+            google.visualization.events.addListener(chart, 'ready', function() {
+                // Show/hide genus label based on filter type
+                if (filterType === "sid") {
+                    $("#genus_label").show();
+                } else {
+                    $("#genus_label").hide();
+                }
+                $("#rank_labels").removeClass("hidden");
+            });
             chart.draw(dataTable, options);
         }
     </script>

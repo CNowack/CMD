@@ -11,6 +11,8 @@ __pycache__/
 dist/
 build/
 .pytest_cache/
+*backup.py
+testing.ipynb
 
 # -- Data --
 data/*
@@ -22,3 +24,5 @@ data/*
 .keys
 .env
 
+# -- Apple --
+.DS_Store

@@ -1,0 +1,550 @@
+bbid,sid,sample_type,timepoint,sequencing_batch,days_from_treatment
+4,BUCCAL-004-000,buccal,Baseline,12/13/2019,0
+4,BUCCAL-004-084,buccal,3 months,12/13/2019,84
+4,BUCCAL-004-260,buccal,Post/Off treatment,10/30/2020,260
+5,BUCCAL-005-000,buccal,Baseline,12/13/2019,0
+5,BUCCAL-005-091,buccal,3 months,12/13/2019,91
+5,NASAL-005-000,nasal,6 weeks,12/13/2019,54
+5,NASAL-005-091,nasal,3 months,12/13/2019,91
+5,STOOL-005-021,stool,Baseline,12/13/2019,21
+5,STOOL-005-114,stool,3 months,12/13/2019,114
+8,BUCCAL-008-000,buccal,Baseline,10/30/2020,0
+8,BUCCAL-008-058,buccal,6 weeks,10/30/2020,58
+8,BUCCAL-008-086,buccal,3 months,10/30/2020,86
+8,NASAL-008-000,nasal,Baseline,10/30/2020,0
+8,NASAL-008-058,nasal,6 weeks,10/30/2020,58
+8,NASAL-008-086,nasal,3 months,10/30/2020,86
+8,STOOL-008-011,stool,Baseline,12/13/2019,11
+8,STOOL-008-058,stool,6 weeks,12/13/2019,58
+8,STOOL-008-086,stool,3 months,12/13/2019,86
+8,STOOL-008-668,stool,Post Progression,12/3/2021,668
+10,BUCCAL-010-000,buccal,Baseline,12/13/2019,0
+10,NASAL-010-000,nasal,Baseline,12/13/2019,0
+11,BUCCAL-011-000,buccal,Baseline,12/13/2019,0
+11,NASAL-011-000,nasal,Baseline,12/13/2019,0
+12,BUCCAL-012-000,buccal,Baseline,10/30/2020,0
+12,BUCCAL-012-042,buccal,Post/Off treatment,10/30/2020,42
+12,NASAL-012-000,nasal,Baseline,10/30/2020,0
+12,NASAL-012-042,nasal,Post/Off treatment,10/30/2020,42
+13,BUCCAL-013-000,buccal,Baseline,4/20/2021,0
+13,BUCCAL-013-044,buccal,6 weeks,4/20/2021,44
+13,BUCCAL-013-098,buccal,3 months,4/20/2021,98
+13,STOOL-013-020,stool,Baseline,12/13/2019,20
+13,STOOL-013-070,stool,6 weeks,12/13/2019,70
+13,STOOL-013-084,stool,3 months,12/13/2019,84
+15,BUCCAL-015-000,buccal,Baseline,10/30/2020,0
+15,BUCCAL-015-042,buccal,6 weeks,10/30/2020,42
+15,BUCCAL-015-084,buccal,3 months,10/30/2020,84
+15,BUCCAL-015-238,buccal,Post/Off treatment,10/30/2020,238
+15,NASAL-015-000,nasal,Baseline,10/30/2020,0
+15,NASAL-015-042,nasal,6 weeks,10/30/2020,42
+15,NASAL-015-084,nasal,3 months,10/30/2020,84
+17,BUCCAL-017-000,buccal,Baseline,4/20/2021,0
+17,BUCCAL-017-042,buccal,6 weeks,4/20/2021,42
+17,BUCCAL-017-098,buccal,3 months,4/20/2021,98
+17,BUCCAL-017-189,buccal,Post/Off treatment,4/20/2021,189
+19,BUCCAL-019-000,buccal,Baseline,10/30/2020,0
+19,BUCCAL-019-058,buccal,6 weeks,10/30/2020,58
+19,BUCCAL-019-119,buccal,3 months,10/30/2020,119
+19,BUCCAL-019-240,buccal,Post/Off treatment,10/30/2020,240
+19,NASAL-019-000,nasal,Baseline,10/30/2020,0
+19,NASAL-019-058,nasal,6 weeks,10/30/2020,58
+19,NASAL-019-119,nasal,3 months,10/30/2020,119
+19,NASAL-019-240,nasal,Post/Off treatment,10/30/2020,240
+19,STOOL-019-030,stool,Baseline,10/30/2020,30
+19,STOOL-019-091,stool,3 months,10/30/2020,91
+19,STOOL-019-254,stool,Post/Off treatment,10/30/2020,254
+23,BUCCAL-023-000,buccal,Baseline,10/30/2020,0
+23,BUCCAL-023-044,buccal,6 weeks,10/30/2020,44
+23,BUCCAL-023-087,buccal,3 months,10/30/2020,87
+23,NASAL-023-000,nasal,Baseline,10/30/2020,0
+23,NASAL-023-044,nasal,6 weeks,10/30/2020,44
+23,NASAL-023-087,nasal,3 months,10/30/2020,87
+23,STOOL-023-023,stool,Baseline,10/30/2020,23
+23,STOOL-023-066,stool,6 weeks,10/30/2020,66
+23,STOOL-023-108,stool,3 months,10/30/2020,108
+24,BUCCAL-024-000,buccal,Baseline,10/30/2020,0
+24,BUCCAL-024-028,buccal,6 weeks,10/30/2020,28
+24,BUCCAL-024-084,buccal,3 months,10/30/2020,84
+24,NASAL-024-000,nasal,Baseline,10/30/2020,0
+24,NASAL-024-028,nasal,6 weeks,10/30/2020,28
+24,NASAL-024-084,nasal,3 months,10/30/2020,84
+25,BUCCAL-025-000,buccal,Baseline,10/30/2020,0
+25,BUCCAL-025-056,buccal,6 weeks,10/30/2020,56
+25,BUCCAL-025-096,buccal,3 months,10/30/2020,96
+25,NASAL-025-000,nasal,Baseline,10/30/2020,0
+25,NASAL-025-056,nasal,6 weeks,10/30/2020,56
+25,NASAL-025-096,nasal,3 months,10/30/2020,96
+26,BUCCAL-026-000,buccal,Baseline,4/20/2021,0
+26,BUCCAL-026-042,buccal,6 weeks,4/20/2021,42
+26,BUCCAL-026-095,buccal,3 months,4/20/2021,95
+32,32-buccal-6_28_21,buccal,Progression/Off Treatment,2/28/2024,700
+32,BUCCAL-032-000,buccal,Baseline,4/20/2021,0
+32,BUCCAL-032-063,buccal,6 weeks,4/20/2021,63
+32,BUCCAL-032-105,buccal,3 months,4/20/2021,105
+34,BUCCAL-034-000,buccal,Baseline,10/30/2020,0
+34,BUCCAL-034-042,buccal,6 weeks,10/30/2020,42
+34,BUCCAL-034-084,buccal,3 months,10/30/2020,84
+34,NASAL-034-000,nasal,Baseline,10/30/2020,0
+34,NASAL-034-042,nasal,6 weeks,10/30/2020,42
+34,NASAL-034-084,nasal,3 months,10/30/2020,84
+34,STOOL-034-021,stool,Baseline,10/30/2020,21
+34,STOOL-034-042,stool,6 weeks,10/30/2020,42
+34,STOOL-034-063,stool,3 months,10/30/2020,63
+35,BUCCAL-035-000,buccal,Baseline,4/20/2021,0
+35,BUCCAL-035-028,buccal,6 weeks,4/20/2021,28
+35,STOOL-035-028,stool,Baseline,12/3/2021,28
+36,BUCCAL-036-022,buccal,Baseline,4/20/2021,22
+36,BUCCAL-036-070,buccal,6 weeks,4/20/2021,70
+36,BUCCAL-036-098,buccal,3 months,4/20/2021,98
+36,BUCCAL-036-184,buccal,Post/Off treatment,4/20/2021,184
+36,STOOL-036-002,stool,Baseline,12/3/2021,2
+36,STOOL-036-040,stool,6 weeks,12/3/2021,40
+36,STOOL-036-096,stool,3 months,12/3/2021,96
+36,STOOL-036-191,stool,Post Progression,12/3/2021,191
+37,BUCCAL-037-000,buccal,Baseline,10/30/2020,0
+37,BUCCAL-037-044,buccal,6 weeks,10/30/2020,44
+37,BUCCAL-037-086,buccal,3 months,10/30/2020,86
+37,NASAL-037-000,nasal,Baseline,10/30/2020,0
+37,NASAL-037-044,nasal,6 weeks,10/30/2020,44
+37,NASAL-037-086,nasal,3 months,10/30/2020,86
+39,39-buccal-7_28_21,buccal,Progression/Off Treatment,2/28/2024,700
+39,BUCCAL-039-000,buccal,Baseline,4/20/2021,0
+39,BUCCAL-039-028,buccal,6 weeks,4/20/2021,28
+39,BUCCAL-039-084,buccal,3 months,4/20/2021,84
+40,BUCCAL-040-000,buccal,Baseline,10/30/2020,0
+40,BUCCAL-040-028,buccal,6 weeks,10/30/2020,28
+40,BUCCAL-040-098,buccal,3 month/post progression,10/30/2020,98
+43,43-buccal-3_30_21,buccal,Progression/Off Treatment,2/28/2024,566
+43,BUCCAL-043-000,buccal,Baseline,4/20/2021,0
+43,BUCCAL-043-042,buccal,6 weeks,4/20/2021,42
+43,BUCCAL-043-084,buccal,3 months,4/20/2021,84
+43,STOOL-043-024,stool,Baseline,12/3/2021,24
+44,44-buccal-6_2_2021,buccal,Progression/Off Treatment,6/26/2024,616
+44,BUCCAL-044-000,buccal,Baseline,4/20/2021,0
+44,BUCCAL-044-028,buccal,6 weeks,4/20/2021,28
+44,BUCCAL-044-056,buccal,3 months,4/20/2021,56
+46,BUCCAL-046-000,buccal,Baseline,10/30/2020,0
+46,BUCCAL-046-147,buccal,3 month/post progression,10/30/2020,147
+46,NASAL-046-000,nasal,Baseline,10/30/2020,0
+46,NASAL-046-147,nasal,3 month/post progression,10/30/2020,147
+47,BUCCAL-047-000,buccal,Baseline,4/20/2021,0
+47,BUCCAL-047-056,buccal,6 weeks,4/20/2021,56
+47,BUCCAL-047-098,buccal,3 months,4/20/2021,98
+47,BUCCAL-047-300,buccal,Post/Off treatment,4/20/2021,300
+48,BUCCAL-048-000,buccal,Baseline,10/30/2020,0
+48,BUCCAL-048-056,buccal,6 weeks,10/30/2020,56
+48,BUCCAL-048-098,buccal,3 months,10/30/2020,98
+48,BUCCAL-048-308,buccal,Post/Off treatment,10/30/2020,308
+48,NASAL-048-000,nasal,Baseline,10/30/2020,0
+48,NASAL-048-056,nasal,6 weeks,10/30/2020,56
+48,NASAL-048-098,nasal,3 months,10/30/2020,98
+48,STOOL-048-014,stool,Baseline,10/30/2020,14
+48,STOOL-048-051,stool,6 weeks,10/30/2020,51
+48,STOOL-048-098,stool,3 months,10/30/2020,98
+48,STOOL-048-366,stool,Post Progression,12/3/2021,366
+49,49-stool-10_30_2019,stool,Baseline,2/28/2024,24
+50,BUCCAL-050-000,buccal,Baseline,4/20/2021,0
+50,BUCCAL-050-042,buccal,6 weeks,4/20/2021,42
+50,BUCCAL-050-076,buccal,3 months,4/20/2021,76
+50,STOOL-050-021,stool,Baseline,12/3/2021,21
+50,STOOL-050-086,stool,6 weeks,12/3/2021,41
+50,STOOL-050-407,stool,3 months,12/3/2021,86
+51,51-buccal-4_28_2021,buccal,Progression/Off Treatment,2/28/2024,560
+51,BUCCAL-051-000,buccal,Baseline,4/20/2021,0
+51,BUCCAL-051-028,buccal,6 weeks,4/20/2021,28
+51,BUCCAL-051-056,buccal,2 months,4/20/2021,56
+51,STOOL-051-028,stool,Baseline,12/3/2021,28
+51,STOOL-051-054,stool,6 weeks,12/3/2021,54
+51,STOOL-051-111,stool,3 months,12/3/2021,111
+56,56-stool-11_6_2019,stool,Baseline,2/28/2024,3
+56,56-stool-12_19_19,stool,6 weeks,6/26/2024,43
+56,BUCCAL-056-000,buccal,Baseline,4/20/2021,0
+56,BUCCAL-056-042,buccal,6 weeks,4/20/2021,42
+56,STOOL-056-000,stool,Baseline,12/3/2021,0
+56,STOOL-056-042,stool,Off treatment,12/3/2021,42
+59,BUCCAL-059-000,buccal,Baseline,4/20/2021,0
+59,BUCCAL-059-042,buccal,6 weeks,4/20/2021,42
+59,BUCCAL-059-063,buccal,2 months,4/20/2021,63
+59,STOOL-059-021,stool,Baseline,12/3/2021,21
+59,STOOL-059-042,stool,6 weeks,12/3/2021,42
+59,STOOL-059-072,stool,3 months,12/3/2021,72
+61,BUCCAL-061-000,buccal,Baseline,4/20/2021,0
+61,BUCCAL-061-063,buccal,6 weeks,4/20/2021,63
+61,BUCCAL-061-084,buccal,3 months,4/20/2021,84
+61,STOOL-061-011,stool,Baseline,12/3/2021,11
+61,STOOL-061-028,stool,6 weeks,12/3/2021,28
+61,STOOL-061-081,stool,3 months,12/3/2021,81
+62,BUCCAL-062-000,buccal,Baseline,4/20/2021,0
+62,BUCCAL-062-042,buccal,6 weeks,4/20/2021,42
+62,BUCCAL-062-105,buccal,3 months,4/20/2021,105
+65,BUCCAL-065-000,buccal,Baseline,4/20/2021,0
+65,BUCCAL-065-066,buccal,6 weeks,4/20/2021,66
+65,BUCCAL-065-084,buccal,3 months,4/20/2021,84
+65,BUCCAL-065-263,buccal,Post/Off treatment,4/20/2021,263
+72,BUCCAL-072-000,buccal,Baseline,4/20/2021,0
+72,STOOL-072-016,stool,Baseline,12/3/2021,16
+74,BUCCAL-074-000,buccal,Baseline,10/30/2020,0
+74,BUCCAL-074-029,buccal,6 weeks,10/30/2020,29
+74,BUCCAL-074-211,buccal,Post/Off treatment,10/30/2020,211
+74,NASAL-074-000,nasal,Baseline,10/30/2020,0
+74,NASAL-074-029,nasal,6 weeks,10/30/2020,29
+75,BUCCAL-075-000,buccal,Baseline,4/20/2021,0
+75,BUCCAL-075-037,buccal,6 weeks,4/20/2021,37
+75,BUCCAL-075-214,buccal,Post/Off treatment,4/20/2021,214
+75,STOOL-075-013,stool,Baseline,12/3/2021,13
+75,STOOL-075-037,stool,6 weeks,12/3/2021,37
+75,STOOL-075-066,stool,2 months,12/3/2021,66
+75,STOOL-075-221,stool,Post Progression,12/3/2021,221
+77,77-stool-7_29_20,stool,3 months,2/28/2024,203
+77,STOOL-077-021,stool,Baseline,12/3/2021,21
+77,STOOL-077-063,stool,6 weeks,12/3/2021,63
+80,BUCCAL-080-000,buccal,Baseline,4/20/2021,0
+80,BUCCAL-080-042,buccal,6 weeks,4/20/2021,42
+80,BUCCAL-080-203,buccal,7 months,4/20/2021,203
+81,BUCCAL-081-000,buccal,Baseline,10/30/2020,0
+81,BUCCAL-081-042,buccal,6 weeks,10/30/2020,42
+81,BUCCAL-081-210,buccal,Post/Off treatment,10/30/2020,210
+81,NASAL-081-000,nasal,Baseline,10/30/2020,0
+81,NASAL-081-042,nasal,6 weeks,10/30/2020,42
+84,BUCCAL-084-000,buccal,Baseline,4/20/2021,0
+84,BUCCAL-084-040,buccal,6 weeks,4/20/2021,40
+84,BUCCAL-084-201,buccal,Post/Off treatment,4/20/2021,201
+85,BUCCAL-085-000,buccal,Baseline,4/20/2021,0
+85,BUCCAL-085-217,buccal,7 months,4/20/2021,217
+85,STOOL-085-007,stool,Baseline,12/3/2021,7
+85,STOOL-085-042,stool,6 weeks,12/3/2021,42
+86,BUCCAL-086-000,buccal,Baseline,4/20/2021,0
+86,BUCCAL-086-189,buccal,6 months,4/20/2021,189
+86,STOOL-086-007,stool,Baseline,12/3/2021,7
+86,STOOL-086-231,stool,7 months (Covid),12/3/2021,231
+87,BUCCAL-087-000,buccal,Baseline,4/20/2021,0
+87,BUCCAL-087-180,buccal,Post/Off treatment,4/20/2021,180
+88,BUCCAL-088-000,buccal,Baseline,4/20/2021,0
+88,BUCCAL-088-182,buccal,6 months,4/20/2021,182
+89,BUCCAL-089-000,buccal,Baseline,4/20/2021,0
+89,BUCCAL-089-173,buccal,6 months,4/20/2021,173
+90,BUCCAL-090-000,buccal,Baseline,4/20/2021,0
+93,93-buccal-2_24_20,buccal,Baseline,2/28/2024,0
+95,95-stool-9_30_20,stool,Baseline,2/28/2024,210
+95,STOOL-095-210,stool,One time on treatment collection,12/3/2021,210
+95,BUCCAL-095-000,buccal,Baseline,4/20/2021,0
+95,BUCCAL-095-168,buccal,5 months,4/20/2021,168
+96,96-buccal-3,buccal,Baseline,6/26/2024,0
+98,BUCCAL-098-000,buccal,Baseline,4/20/2021,0
+101,BUCCAL-101-000,buccal,Baseline,4/20/2021,0
+101,BUCCAL-101-044,buccal,6 weeks,4/20/2021,44
+101,BUCCAL-101-092,buccal,3 months,4/20/2021,92
+101,STOOL-101-014,stool,Baseline,12/3/2021,14
+101,STOOL-101-043,stool,6 weeks,12/3/2021,43
+101,STOOL-101-106,stool,3 months,12/3/2021,106
+101,STOOL-101-155,stool,Post Progression,12/3/2021,155
+103,103-buccal-10_27_20,buccal,1 month,2/28/2024,56
+103,103-buccal-9-1-2020,buccal,Baseline,5/29/2024,0
+104,104-buccal-8_4_2021,buccal,6 weeks,2/28/2024,49
+104,104-buccal-9_29_21,buccal,3 months,2/28/2024,105
+104,104-buccal-9-2-2020,buccal,Baseline,5/29/2024,0
+105,105-buccal-10_21_20,buccal,1 month,2/28/2024,42
+105,BUCCAL-105-000,buccal,Baseline,4/20/2021,0
+106,106-buccal-10_21_21,buccal,Progression/Off Treatment,2/28/2024,399
+106,106-buccal-10_29_20,buccal,1 month,2/28/2024,42
+106,106-buccal-4_15_21,buccal,6 month,2/28/2024,210
+106,BUCCAL-106-000,buccal,Baseline,4/20/2021,0
+109,109-buccal-3_17_21,buccal,3 month,2/28/2024,167
+109,BUCCAL-109-000,buccal,Baseline,4/20/2021,0
+109,BUCCAL-109-048,buccal,6 weeks,4/20/2021,48
+109,STOOL-109-021,stool,Baseline,12/3/2021,21
+109,STOOL-109-069,stool,6 weeks,12/3/2021,69
+109,STOOL-109-146,stool,3 months,12/3/2021,146
+110,110-buccal-9_20_21,buccal,Progression/Off Treatment,2/28/2024,350
+110,110-stool-12_21_21,stool,Progression/Off Treatment,6/26/2024,441
+110,BUCCAL-110-000,buccal,Baseline,4/20/2021,0
+110,BUCCAL-110-042,buccal,6 weeks,4/20/2021,42
+110,BUCCAL-110-154,buccal,5 months,4/20/2021,154
+110,STOOL-110-022,stool,Baseline,12/3/2021,22
+110,STOOL-110-043,stool,6 weeks,12/3/2021,43
+110,STOOL-110-072,stool,3 months,12/3/2021,72
+111,111-buccal-10_6_2020,buccal,Baseline,2/28/2024,0
+114,114-buccal-12-28-21,buccal,Progression/Off Treatment,5/29/2024,441
+114,114-buccal-5_11_21,buccal,7 month,2/28/2024,210
+114,BUCCAL-114-000,buccal,Baseline,4/20/2021,0
+115,115-buccal-4_21_2021,buccal,6 month,2/28/2024,190
+115,BUCCAL-115-000,buccal,Baseline,4/20/2021,0
+115,STOOL-115-043,stool,6 weeks,12/3/2021,43
+115,STOOL-115-085,stool,3 months,12/3/2021,85
+117,BUCCAL-117-000,buccal,Baseline,4/20/2021,0
+120,120-buccal-3_11_21,buccal,6 month,2/28/2024,133
+120,BUCCAL-120-000,buccal,Baseline,4/20/2021,0
+120,STOOL-120-004,stool,Baseline,12/3/2021,4
+120,STOOL-120-049,stool,6 weeks,12/3/2021,49
+120,STOOL-120-147,stool,3 month/post progression,12/3/2021,147
+121,BUCCAL-121-000,buccal,Baseline,4/20/2021,0
+121,BUCCAL-121-133,buccal,3 months,4/20/2021,133
+122,122-buccal-3_26_2021,buccal,3 month,2/28/2024,143
+122,BUCCAL-122-000,buccal,Baseline,4/20/2021,0
+123,BUCCAL-123-000,buccal,Baseline,4/20/2021,0
+123,BUCCAL-123-112,buccal,3 months,4/20/2021,112
+125,125-buccal-2_15_22,buccal,Progression/Off Treatment,6/26/2024,455
+125,125-stool-5_24_22,stool,Progression/Off Treatment,2/28/2024,553
+125,BUCCAL-125-000,buccal,Baseline,4/20/2021,0
+125,BUCCAL-125-112,buccal,3 months,4/20/2021,112
+125,STOOL-125-021,stool,Baseline,12/3/2021,21
+125,STOOL-125-036,stool,6 weeks,12/3/2021,36
+125,STOOL-125-084,stool,3 months,12/3/2021,84
+135,STOOL-135-021,stool,Baseline,12/3/2021,21
+135,STOOL-135-063,stool,6 weeks/Off treatment,12/3/2021,63
+145,145-stool-4_7_21,stool,Baseline/6 weeks,2/28/2024,42
+145,STOOL-145-042,stool,Baseline/6 weeks,12/3/2021,42
+145,145-stool-5_19_21,stool,3 month,6/26/2024,84
+145,STOOL-145-084,stool,3 months,12/3/2021,84
+146,146-stool-4_12_21,stool,Baseline,2/28/2024,42
+146,146-stool-5-24-21,stool,1 month,5/29/2024,84
+146,146-stool-7_7_21,stool,3 month,2/28/2024,128
+146,STOOL-146-042,stool,Baseline,12/3/2021,42
+146,STOOL-146-084,stool,6 weeks,12/3/2021,84
+146,STOOL-146-128,stool,3 months,12/3/2021,128
+148,148-buccal-3_2_21,buccal,Baseline,2/28/2024,0
+149,149-buccal-3_8_21,buccal,Baseline,6/26/2024,0
+149,149-buccal-4-19-21,buccal,1 month,5/29/2024,42
+149,149-buccal-6_4_21,buccal,3 month,6/26/2024,88
+149,STOOL-149-021,stool,Baseline,12/3/2021,21
+149,STOOL-149-088,stool,6 weeks,12/3/2021,88
+149,STOOL-149-130,stool,3 months,12/3/2021,130
+150,150-buccal-3_9_21,buccal,Baseline,2/28/2024,0
+155,155-buccal-3_30_21,buccal,Baseline,2/28/2024,0
+155,155-buccal-1-2-5_11_21,buccal,1 month,6/26/2024,42
+155,155-buccal-5_11_21,buccal,1 month,2/28/2024,42
+155,155-buccal-6_22_21,buccal,3 month,2/28/2024,84
+155,155-stool-4_27_21,stool,Baseline,2/28/2024,28
+155,155-stool-6_22_21,stool,1 month,2/28/2024,84
+155,155-stool-7_13_21,stool,3 month,2/28/2024,105
+155,STOOL-155-028,stool,Baseline,12/3/2021,28
+155,STOOL-155-084,stool,6 weeks,12/3/2021,84
+155,STOOL-155-105,stool,3 months,12/3/2021,105
+156,156-buccal-4_1_21,buccal,Baseline,2/28/2024,0
+156,156-buccal-5_20_21,buccal,1 month,6/26/2024,49
+156,156-buccal-7_1_21,buccal,3 month,2/28/2024,91
+161,161-buccal-5_4_21,buccal,Baseline,2/28/2024,0
+165,165-buccal-1_2-6-30-21,buccal,1 month/Progression,5/29/2024,47
+165,165-buccal-5_14_21,buccal,Baseline,2/28/2024,0
+165,165-stool-7_14_21,stool,Baseline,2/28/2024,61
+165,165-stool-8_9_21,stool,1 month,2/28/2024,87
+169,169-buccal-6_4_21,buccal,Baseline,2/28/2024,0
+170,170-buccal-5_8_23,buccal,Progression/Off Treatment,2/28/2024,700
+170,170-buccal-6_7_21,buccal,Baseline,2/28/2024,0
+170,170-buccal-9_1_21,buccal,3 month,2/28/2024,86
+173,173-buccal-10_26_21,buccal,3 month,2/28/2024,120
+173,173-buccal-11_23_21,buccal,Progression/Off Treatment,2/28/2024,148
+173,173-buccal-6-28-21,buccal,Baseline,5/29/2024,0
+173,173-buccal-8_10_21,buccal,1 month,2/28/2024,43
+174,174-buccal-7-1-21,buccal,Baseline,5/29/2024,0
+175,175-buccal-7-2-21,buccal,Baseline,5/29/2024,0
+176,176-buccal-7-19-21,buccal,Baseline,5/29/2024,0
+176,176-buccal-9-27-21,buccal,6 weeks,5/29/2024,68
+178,178-buccal-10_15_21,buccal,3 month,6/26/2024,81
+178,178-buccal-11-19-21,buccal,Progression/Off Treatment,5/29/2024,116
+178,178-buccal-1-2-11_19_21,buccal,Progression/Off Treatment,6/26/2024,116
+178,178-buccal-7-26-21,buccal,Baseline,5/29/2024,0
+178,178-stool-9_3_2021,stool,Baseline,2/28/2024,39
+179,179-buccal-10_4_21,buccal,6 week,6/26/2024,75
+179,179-buccal-7-28-21,buccal,Baseline,5/29/2024,7
+179,179-stool-11_22_21,stool,Follow-up,2/28/2024,123
+179,179-stool-8_23_21,stool,Baseline,2/28/2024,33
+181,181-buccal-1-2-8_9_21,buccal,Baseline,6/26/2024,0
+181,181-buccal-8-9-21,buccal,Baseline,5/29/2024,0
+184,184-buccal-8_16_21,buccal,Baseline,6/26/2024,0
+185,185-buccal-10-20-21,buccal,6 weeks,5/29/2024,61
+185,185-buccal-10-31-22,buccal,Progression/Off Treatment,5/29/2024,437
+185,185-buccal-12-1-21,buccal,3 month,5/29/2024,103
+185,185-buccal-8-20-21,buccal,Baseline,5/29/2024,0
+185,185-stool-12_1_21,stool,3 months,2/28/2024,103
+189,189-buccal-10_5_21,buccal,1 month,6/26/2024,28
+189,189-buccal-11-30-21,buccal,3 month,5/29/2024,84
+189,189-buccal-9-7-21,buccal,Baseline,5/29/2024,0
+194,194-stool-12_6_21,stool,2 month,6/26/2024,82
+194,194-buccal-12-15-21,buccal,3 month,5/29/2024,91
+194,194-buccal-9_15_21,buccal,Baseline,6/26/2024,0
+194,194-stool-10_27_21,stool,1 month,2/28/2024,42
+194,194-stool-10_6_21,stool,Baseline,2/28/2024,21
+200,200-buccal-10_5_21,buccal,Baseline,6/26/2024,0
+200,200-buccal-11-23-21,buccal,1 month,5/29/2024,42
+200,200-buccal-1-4-22,buccal,3 month,5/29/2024,84
+200,200-buccal-1-2-5_31_22,buccal,Progression/Off Treatment,6/26/2024,231
+200,200-buccal-5-31-22,buccal,Progression/Off Treatment,5/29/2024,231
+209,209-buccal-11-10-21,buccal,Baseline,5/29/2024,0
+209,209-buccal-12-22-21,buccal,1 month,5/29/2024,42
+209,209-stool-11_23_21,stool,Baseline,2/28/2024,13
+209,209-stool-12_22_21,stool,1 month,2/28/2024,49
+209,209-stool-2_16_22,stool,3 month,2/28/2024,98
+213,213-buccal-11-16-21,buccal,Baseline,5/29/2024,0
+213,213-buccal-1-4-22,buccal,6 week,5/29/2024,42
+213,213-buccal-2-15-22,buccal,3 month,5/29/2024,84
+217,217-buccal-12_1_21,buccal,Baseline,6/26/2024,0
+217,217-stool-1-19-22,stool,Baseline,5/29/2024,49
+218,218-buccal-1_18_22,buccal,1 month,6/26/2024,43
+218,218-buccal-12-6-21,buccal,Baseline,5/29/2024,0
+218,218-buccal-3_10_22,buccal,3 month,6/26/2024,94
+218,218-buccal-6-27-22,buccal,Progression/Off Treatment,5/29/2024,203
+218,218-stool-1_18_22,stool,1 month,2/28/2024,43
+218,218-stool-12_27_21,stool,Baseline,2/28/2024,21
+218,218-stool-3_24_22,stool,3 month,2/28/2024,108
+220,220-buccal-1_19_22,buccal,1 month,6/26/2024,42
+220,220-buccal-12_8_21,buccal,Baseline,6/26/2024,0
+221,221-stool-02_240626,stool,6 week,6/26/2024,70
+221,221-buccal-02-22-22,buccal,2 month,5/29/2024,70
+221,221-buccal-12-9-21,buccal,Baseline,5/29/2024,0
+221,221-buccal-2_1_22,buccal,6 week,6/26/2024,49
+221,221-buccal-3_15_22,buccal,3 month,6/26/2024,91
+221,221-buccal-5-17-22,buccal,Progression/Off Treatment,5/29/2024,154
+221,221-stool-12_240626,stool,Baseline,6/26/2024,0
+221,221-stool-12_240228,stool,Baseline,2/28/2024,0
+221,221-stool-3_15_22,stool,3 month,2/28/2024,91
+221,221-stool-5_19_22,stool,Off treatment,2/28/2024,156
+222,222-buccal-1_2-02-22-22,buccal,6 week,5/29/2024,56
+222,222-buccal-12-28-21,buccal,Baseline,5/29/2024,0
+222,222-buccal-3-22-22,buccal,3 month/Progression,5/29/2024,84
+223,223-stool-2_15_22,stool,Baseline,2/28/2024,33
+223,223-stool-3_17_22,stool,1 month,2/28/2024,63
+223,223-stool-4_28_22,stool,3 month/Progression,2/28/2024,105
+224,224-buccal-1-13-22,buccal,Baseline,5/29/2024,0
+224,224-buccal-2-24-22,buccal,1 month,5/29/2024,42
+224,224-buccal-4-7-22,buccal,3 month,5/29/2024,84
+224,224-stool-2_4_22,stool,Baseline,2/28/2024,22
+224,224-stool-4_28_22,stool,Follow-up,2/28/2024,105
+229,229-buccal-1_21_22,buccal,Baseline,6/26/2024,0
+230,230-buccal-1_24_22,buccal,Baseline,6/26/2024,0
+230,230-buccal-3_7_22,buccal,1 month,6/26/2024,42
+230,230-buccal-5_9_22,buccal,3 month,6/26/2024,105
+230,230-stool-3_14_22,stool,1 month,2/28/2024,49
+230,230-stool-3_7_22,stool,Baseline 1,2/28/2024,42
+230,230-stool-4_11_22,stool,3 month,2/28/2024,77
+230,230-stool-9_7_22,stool,Progression/Off Treatment,2/28/2024,226
+238,238-buccal-2-8-22,buccal,Baseline,5/29/2024,0
+238,238-buccal-3-22-22,buccal,1 month,5/29/2024,0
+238,238-buccal-5-3-22,buccal,3 month/Progression,5/29/2024,0
+238,238-stool-4_12_22,stool,Baseline/1 month,2/28/2024,63
+238,238-stool-6_1_22,stool,Progression/Off Treatment,2/28/2024,113
+238,328-stool-11_9_22,stool,1 month,2/28/2024,42
+239,239-stool-3_1_22,stool,Baseline,6/26/2024,20
+239,239-buccal-3_22_22,buccal,Baseline,6/26/2024,41
+239,239-stool-4_12_22,stool,1 month,6/26/2024,62
+239,239-stool-5-24-22,stool,3 month,5/29/2024,104
+246,246-buccal-2_11_22,buccal,Baseline,6/26/2024,0
+247,247-buccal-2-15-22,buccal,Baseline,5/29/2024,0
+247,247-stool-3_15_22,stool,Baseline/1 month,2/28/2024,7
+248,248-buccal-2_17_22,buccal,Baseline,6/26/2024,0
+248,248-buccal-3-31-22,buccal,1 month,5/29/2024,42
+248,248-buccal-5-6-22,buccal,3 month/Progression,5/29/2024,78
+253,253-buccal-02-23-22,buccal,Baseline,5/29/2024,0
+253,253-buccal-5-4-22,buccal,Follow Up/Progression,5/29/2024,70
+253,253-stool-3_16_22,stool,Baseline,2/28/2024,21
+263,263-buccal-3-16-22,buccal,Baseline,5/29/2024,0
+263,263-buccal-5-6-22,buccal,6 week,5/29/2024,42
+264,264-buccal-3-17-22,buccal,Baseline,5/29/2024,0
+264,264-buccal-5-31-22,buccal,3 month/Progression,5/29/2024,64
+264,264-buccal-5-9-22,buccal,6 week,5/29/2024,42
+266,266-buccal-3_21_22,buccal,Baseline,6/26/2024,0
+269,269-buccal-3_23_22,buccal,Baseline,6/26/2024,0
+269,269-buccal-5_11_22,buccal,6 week,6/26/2024,42
+269,269-stool-4_20_22,stool,Baseline,2/28/2024,21
+269,269-stool-5_11_22,stool,1 month,2/28/2024,42
+270,270-buccal-3_25_22,buccal,Baseline,6/26/2024,0
+271,271-buccal-3_29_22,buccal,Baseline,6/26/2024,0
+271,271-stool-6_9_22,stool,6 weeks,6/26/2024,44
+271,271-buccal-9_29_22,buccal,3 months,6/26/2024,156
+280,280-buccal-4_11_22,buccal,Baseline,6/26/2024,0
+280,280-buccal-5-23-22,buccal,1 month,5/29/2024,42
+280,280-buccal-7_6_22,buccal,3 month,6/26/2024,86
+280,280-buccal-8-1-22,buccal,Progression/Off Treatment,5/29/2024,112
+286,286-buccal-4_19_22,buccal,Baseline,6/26/2024,0
+286,286-buccal-6_10_22,buccal,1 month,6/26/2024,52
+286,286-buccal-7_22_22,buccal,3 month,6/26/2024,94
+287,287-buccal-4_21_22,buccal,Baseline,6/26/2024,0
+287,287-buccal-6_2_22,buccal,1 month,6/26/2024,42
+287,287-buccal-7_26_22,buccal,3 month,6/26/2024,96
+296,296-buccal-5-4-22,buccal,Baseline,5/29/2024,0
+296,296-buccal-6-15-22,buccal,1 month,5/29/2024,42
+296,296-buccal-8-24-22,buccal,3 month,5/29/2024,112
+297,297-buccal-5_4_22,buccal,Baseline,6/26/2024,0
+297,297-buccal-6_15_22,buccal,1 month,6/26/2024,42
+297,297-buccal-8_10_22,buccal,3 month,6/26/2024,98
+297,297-stool-5_24_22,stool,Baseline,2/28/2024,20
+297,297-stool-6_8_22,stool,1 month,2/28/2024,35
+297,297-stool-8_9_22,stool,3 month,2/28/2024,97
+298,298-buccal-5_11_22,buccal,Baseline,6/26/2024,0
+298,298-buccal-6-29-22,buccal,1 month,5/29/2024,49
+304,304-buccal-3-29-23,buccal,Progression/Off Treatment,5/29/2024,315
+304,304-buccal-5_18_22,buccal,Baseline,6/26/2024,0
+304,304-buccal-6_29_22,buccal,1 month,6/26/2024,42
+304,304-buccal-8-24-22,buccal,3 month,5/29/2024,98
+304,304-stool-4_12_23,stool,Progression/Off Treatment,2/28/2024,329
+304,304-stool-5_18_22,stool,Baseline,2/28/2024,0
+304,304-stool-7_5_22,stool,6 week,2/28/2024,48
+304,304-stool-9_7_22,stool,3 month,2/28/2024,112
+308,308-buccal-6_3_22,buccal,Baseline,6/26/2024,0
+308,308-buccal-7-15-22,buccal,1 month,5/29/2024,42
+308,308-buccal-9-16-22,buccal,3 month,5/29/2024,105
+314,314-buccal-10-20-22,buccal,3 month,5/29/2024,84
+314,314-buccal-7_28_22,buccal,Baseline,6/26/2024,0
+314,314-buccal-9_8_22,buccal,1 month,6/26/2024,42
+314,314-stool-12_1_22,stool,3 month,2/28/2024,126
+314,314-stool-8_240228,stool,Baseline,2/28/2024,27
+314,314-stool-8_240626,stool,Baseline,6/26/2024,27
+315,315-buccal-10-28-22,buccal,3 month,5/29/2024,84
+315,315-buccal-8-5-22,buccal,Baseline,5/29/2024,0
+315,315-buccal-9_2_22,buccal,1 month,6/26/2024,28
+316,316-buccal-11_22_22,buccal,3 month,6/26/2024,105
+316,316-buccal-8_9_22,buccal,Baseline,6/26/2024,0
+316,316-buccal-9_20_22,buccal,1 month,6/26/2024,42
+316,316-stool-10_11_22,stool,Baseline/2 month,2/28/2024,63
+317,317-buccal-8_16_22,buccal,Baseline,6/26/2024,0
+321,321-buccal-10_11_22,buccal,1 month,6/26/2024,28
+321,321-buccal-12_6_22,buccal,3 month,6/26/2024,84
+321,321-buccal-9_13_22,buccal,Baseline,6/26/2024,0
+328,328-buccal-1_11_23,buccal,3 month,6/26/2024,105
+328,328-buccal-11_9_22,buccal,1 month,6/26/2024,42
+328,328-buccal-3_1_23,buccal,Progression/Off Treatment,6/26/2024,154
+328,328-buccal-9_28_22,buccal,Baseline,6/26/2024,0
+328,328-stool-10_19_22,stool,Baseline,2/28/2024,21
+329,329-buccal-9_28_22,buccal,Baseline,6/26/2024,0
+329,329-stool-10_3_22,stool,Baseline,2/28/2024,0
+331,331-buccal-11-11-22,buccal,1 month,5/29/2024,42
+331,331-buccal-9-30-22,buccal,Baseline,5/29/2024,0
+333,333-buccal-10-4-22,buccal,Baseline,5/29/2024,0
+333,333-buccal-11-15-22,buccal,1 month,5/29/2024,42
+333,333-buccal-1-17-23,buccal,3 month,5/29/2024,105
+333,333-buccal-5-22-23,buccal,Progression/Off Treatment,5/29/2024,230
+336,336-buccal-1_13_23,buccal,3 month,6/26/2024,94
+336,336-buccal-10-11-22,buccal,Baseline,5/29/2024,0
+336,336-buccal-11_22_22,buccal,1 month,6/26/2024,42
+336,336-stool-11_22_22,stool,1 month,2/28/2024,42
+336,336-stool-11_4_22,stool,Baseline,2/28/2024,24
+336,336-stool-2_6_23,stool,3 month,2/28/2024,118
+339,339-buccal-10-26-22,buccal,Baseline,5/29/2024,0
+339,339-buccal-1-18-23,buccal,3 month,5/29/2024,84
+339,339-buccal-12-7-22,buccal,1 month,5/29/2024,42
+339,339-stool-11_16_22,stool,Baseline,2/28/2024,21
+339,339-stool-12_28_22,stool,3 month,2/28/2024,63
+339,339-stool-12_7_22,stool,1 month,2/28/2024,42
+339,339-stool-2_3_23,stool,Progression/Off Treatment,2/28/2024,100
+346,346-buccal-11-11-22,buccal,Baseline,5/29/2024,0
+346,346-buccal-1-2-11_11_22,buccal,Baseline,6/26/2024,0
+346,346-buccal-12-23-22,buccal,1 month,5/29/2024,42
+349,349-buccal-11-22-22,buccal,Baseline,5/29/2024,0
+349,349-buccal-12-30-22,buccal,1 month,5/29/2024,38
+349,349-buccal-2-17-23,buccal,3 month,5/29/2024,87
+356,356-buccal-12_13_22,buccal,Baseline,6/26/2024,0
+368,368-buccal-1-20-23,buccal,Baseline,5/29/2024,0
+368,368-buccal-3-3-23,buccal,1 month,5/29/2024,42
+368,368-buccal-4-21-23,buccal,3 month,5/29/2024,91
+374,374-buccal-2-7-23,buccal,Baseline,5/29/2024,1
+374,374-buccal-3-21-23,buccal,1 month,5/29/2024,42
+374,374-buccal-5-2-23,buccal,3 month,5/29/2024,84
+383,383-buccal-3-10-23,buccal,Baseline,5/29/2024,0
+390,390-buccal-3-23-23,buccal,Baseline,5/29/2024,0
+390,390-buccal-4-20-23,buccal,1 month,5/29/2024,28
+391,391-buccal-3_24_23,buccal,Baseline,6/26/2024,0
+391,391-buccal-5-5-23,buccal,1 month,5/29/2024,42
+396,396-buccal-4-7-23,buccal,Baseline,5/29/2024,0
+396,396-buccal-5-19-23,buccal,1 month,5/29/2024,42
+396,396-buccal-6-30-23,buccal,3 month,5/29/2024,84

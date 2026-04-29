@@ -18,3 +18,7 @@ data/*
 # -- SQL --
 *.sqlite3
 
+# -- Credentials --
+.keys
+.env
+

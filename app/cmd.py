@@ -9,8 +9,10 @@ each one. Database queries and chart-generating logic will be added later
 in separate functions or modules — keep this file focused on *routing*.
 """
 
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, abort
 import mariadb
+import os
+from dotenv import load_dotenv
 
 # ---------------------------------------------------------------------------
 # App initialization
@@ -34,7 +36,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def home():
     """
-    Landing page. Satisfies Benson eval #2: project name, student
+    Landing page. Satisfies Benson evalue #2: project name, student
     developers, faculty advisor, BU/BF768 attribution, and an abstract.
     Most of that lives in home.html and the shared footer in base.html.
     """
@@ -94,16 +96,64 @@ def license_page():
 # ===========================================================================
 # These don't render HTML — they return JSON. The frontend JavaScript
 # (jQuery $.get in our case) calls them in the background to load chart
-# data WITHOUT a full page reload. This is the AJAX requirement (eval #10).
+# data WITHOUT a full page reload. This is the AJAX requirement (evalue #10).
 #
 # We'll fill these in as each analysis page is built. Stubs for now so the
 # routes exist and don't 404.
 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+SQL_DIR  = os.path.join(APP_ROOT, "..", "db")
+
+def load_sql(filename):
+    """
+    Loads sql file from SQL_DIR
+    """
+    path = os.path.join(SQL_DIR, filename)
+    with open(path, "r") as f:
+        return f.read()
+
 @app.route("/api/sankey_data", methods=["GET"])
 def api_sankey_data():
-    """Returns Sankey-format data: [[source, target, value], ...]."""
-    # TODO: query DB, format for Google Charts Sankey
-    return jsonify([])
+    """
+    Returns Sankey data: list of [source, target, valueue] triples.
+    Aggregates ASV counts across taxonomic ranks: Phylum -> Class -> Order -> Family.
+    """
+
+    load_dotenv()
+    # set username and password
+    db_usr = os.environ.get("DB_USR")
+    db_pw = os.environ.get("DB_PW")
+    if request.args:
+        # Get the sid from request.args
+        sid = request.args.get('sid')
+        if sid != "":
+            # The query is identical to db/sankey_query.sql. Kept inline for now;
+            # could be moved to a .sql file and read in if it grows.
+            query = load_sql("sankey.sql")
+            params = (sid, sid, sid)
+
+            connection, cursor = None, None
+            try:
+                connection = mariadb.connect(
+                    host = 'bioed-new.bu.edu',
+                    user = db_usr,
+                    password = db_pw,
+                    db = 'Team13',
+                    port = 4253)
+                
+                cursor = connection.cursor()
+                cursor.execute(query, params)
+                rows = cursor.fetchall()
+                # convert tuples to list
+                results = [[source, target, int(value)] for source, target, value in rows]
+                return jsonify(results)
+            except mariadb.Error as e:
+                return jsonify({"error": str(e)}), 500
+            finally:
+                if cursor:   cursor.close()
+                if connection: connection.close()
+        return jsonify("")
+    return jsonify("")
 
 
 @app.route("/api/cancer_diversity_search", methods=["GET"])

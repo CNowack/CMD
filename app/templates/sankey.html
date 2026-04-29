@@ -4,39 +4,129 @@
 
 {% block head_extra %}
     <style>
-        /* Sankey-specific tweaks can go here */
+        #sankey_chart {
+            min-height: 600px;
+        }
+        #status_message {
+            margin: var(--space-md);
+            font-style: italic;
+            color: var(--color-muted);
+        }
+        #sid_input {
+            font-size: var(--font-size-base);
+            padding: var(--space-xs);
+            width: 250px;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
-    <h2>Sankey Diagram</h2>
+    <h2>Taxonomic Sankey</h2>
 
     <div class="panel">
         <p>
-            Visualize the flow from <strong>cancer type</strong> to
-            <strong>treatment regimen</strong> to <strong>response outcome</strong>
-            across the BMC cohort.
+            This Sankey diagram shows the flow of ASVs through the taxonomic
+            hierarchy: <strong>Phylum &rarr; Class &rarr; Order &rarr; Family</strong>
+            for a single sample. Each ribbon's width is proportional to the
+            number of distinct ASVs assigned to that lineage.
+        </p>
+        <p>
+            Enter a sample ID below (e.g. <code>103-buccal-10_27_20</code>) to render its
+            taxonomic profile.
         </p>
     </div>
 
-    <h3>Filter options</h3>
+    <h3>Sample selection</h3>
     <div class="panel">
-        <p><em>Form to be implemented — owner: Cam</em></p>
-        <!--
-            TODO: filter inputs (sample site, timepoint range)
-            TODO: AJAX call to /api/sankey_data
-            TODO: render results via google.visualization.Sankey
-        -->
+        <label for="sid_input">Sample ID:</label>
+        <input type="text" id="sid_input" placeholder="e.g. '103-buccal-10_27_20'">
+        <button id="render_button">Render Sankey</button>
     </div>
 
+    <h3>Diagram</h3>
     <div class="chart-container">
+        <div id="status_message">Enter a sample ID above to begin.</div>
         <div id="sankey_chart"></div>
     </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
+        // Load the Sankey package once on page load. The chart only renders
+        // when the user clicks the button.
         google.charts.load('current', {'packages': ['sankey']});
-        // $(document).ready(function() { ... });
+
+        $(document).ready(function() {
+            $("#render_button").click(function() {
+                fetchSankeyData();
+            });
+
+            // Quality-of-life: pressing Enter in the input also triggers fetch.
+            $("#sid_input").keypress(function(e) {
+                if (e.which === 13) { fetchSankeyData(); }
+            });
+        });
+
+        function fetchSankeyData() {
+            const sid = $("#sid_input").val().trim();
+            if (sid === "") {
+                alert("Please enter a sample ID.");
+                return;
+            }
+
+            // Clear previous chart and show loading state.
+            $("#sankey_chart").empty();
+            $("#status_message").text("Loading data for " + sid + "...").show();
+
+            // jQuery serializes the second arg into the URL as ?sid=...
+            $.get(
+                "{{ url_for('api_sankey_data') }}",
+                { sid: sid },
+                function(data) { handleSankeyResponse(data, sid); },
+                "json"
+            ).fail(function(jqXHR) {
+                // jqXHR.responseJSON exists if the server returned a JSON error body.
+                const msg = jqXHR.responseJSON && jqXHR.responseJSON.error
+                          ? jqXHR.responseJSON.error
+                          : "Request failed (HTTP " + jqXHR.status + ")";
+                $("#status_message").text("Error: " + msg);
+            });
+        }
+
+        function handleSankeyResponse(data, sid) {
+            if (data.error) {
+                $("#status_message").text("Database error: " + data.error);
+                return;
+            }
+            if (!Array.isArray(data) || data.length === 0) {
+                $("#status_message").text("No taxonomy data found for sample " + sid + ".");
+                return;
+            }
+
+            $("#status_message").hide();
+            drawSankey(data);
+        }
+
+        function drawSankey(rows) {
+            const chartData = [['From', 'To', 'Count']].concat(rows);
+            const dataTable = google.visualization.arrayToDataTable(chartData);
+
+            const options = {
+                width: 1000,
+                height: 600,
+                sankey: {
+                    node: {
+                        label: { fontSize: 12 },
+                        nodePadding: 8,
+                    },
+                    link: { colorMode: 'gradient' },
+                },
+            };
+
+            const chart = new google.visualization.Sankey(
+                document.getElementById('sankey_chart')
+            );
+            chart.draw(dataTable, options);
+        }
     </script>
 {% endblock %}

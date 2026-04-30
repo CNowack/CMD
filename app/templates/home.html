@@ -20,7 +20,9 @@
             The database contains data from <strong>547 samples</strong>
             collected from <strong>142 BMC cancer patients</strong> across
             three anatomical sites (buccal, stool, nasal) over multiple
-            timepoints since 2019.
+            timepoints since 2019. Along with <strong>188 samples</strong>
+            from Derosa et al. <em>Cell</em> 2024, used in the meta-analysis
+            of this tool.
         </p>
     </div>
 
@@ -37,18 +39,20 @@
 
     <h2>Featured visualization</h2>
     <p>
-        The Sankey diagram below summarizes how cancer types in our cohort
-        flow through treatment regimens to response outcomes.
+        The Sankey diagram below summarizes the microbiome data by taxonomic level to visualize diversity.
     </p>
     <div class="chart-container">
-        <div id="sankey_preview"></div>
+        <div id="sankey_preview">
+            <img src="{{ url_for('static', filename='images/ex_sankey.png') }}" alt="Example Sankey Plot" id="sankey_preview" style="width: 100%; height: auto; display: block;">
+        </div>
     </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
+        const placeholderImageUrl = "{{ url_for('static', filename='images/ex_sankey.png') }}";
         // Sankey preview will be wired up to /api/sankey_data via AJAX.
         // Stubbed for now — Cam to implement.
-        google.charts.load('current', {'packages': ['sankey']});
+        // google.charts.load('current', {'packages': ['sankey']});
     </script>
 {% endblock %}

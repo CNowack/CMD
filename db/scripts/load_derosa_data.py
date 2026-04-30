@@ -16,7 +16,7 @@ Input files (data/processed/):
 No microbiome processing logic here — all transformations were done
 in process_derosa.py. This script only reads and inserts.
 
-bbid (FK to Patient.patient_id) is derived at load time from the sid,
+patient_id (FK to Patient.patient_id) is derived at load time from the sid,
 not stored in the processed files. For Derosa samples:
     sid format:  "{patient_id}_stool_baseline"
     patient_id:  strip "_stool_baseline" suffix from sid
@@ -143,7 +143,6 @@ print(f"  ✓ {cursor.rowcount} patient rows inserted")
 # =============================================================================
 # One synthesized stool baseline row per Derosa patient.
 # sid = "{patient_id}_stool_baseline" — constructed from patient_id.
-# bbid = patient_id (the FK).
 # sequencing_batch and days_from_treatment are NULL (not collected in Derosa).
 
 print("\n── 2. Derosa sample rows ─────────────────────────────────")
@@ -160,7 +159,7 @@ if not derosa_patient_ids:
 
 sql = """
     INSERT IGNORE INTO Sample
-        (sid, bbid, sample_type, timepoint)
+        (sid, patient_id, sample_type, timepoint)
     VALUES (%s, %s, %s, %s)
 """
 sample_rows = [
@@ -187,7 +186,7 @@ print(f"  Loaded {len(genus_df):,} genus abundance rows from processed file")
 
 # Build set of valid sids from Sample table for FK verification
 cursor.execute(
-    "SELECT sid FROM Sample WHERE bbid IN "
+    "SELECT sid FROM Sample WHERE patient_id IN "
     "(SELECT patient_id FROM Patient WHERE data_source = 'Derosa_NSCLC')"
 )
 valid_sids = {row[0] for row in cursor.fetchall()}
@@ -200,18 +199,18 @@ if missing_sids:
           f"— these rows will be skipped")
     genus_df = genus_df[genus_df["sid"].isin(valid_sids)]
 
-# Derive bbid from sid: strip "_stool_baseline" suffix
-genus_df["bbid"] = genus_df["sid"].str.replace("_stool_baseline", "", regex=False)
+# Derive patient_id from sid: strip "_stool_baseline" suffix
+genus_df["patient_id"] = genus_df["sid"].str.replace("_stool_baseline", "", regex=False)
 
 sql = """
     INSERT IGNORE INTO GenusAbundance
-        (sid, bbid, genus, relative_abundance, data_source)
+        (sid, patient_id, genus, relative_abundance, data_source)
     VALUES (%s, %s, %s, %s, %s)
 """
 rows = [
     (
         r.sid,
-        r.bbid,
+        r.patient_id,
         r.genus,
         round(float(r.relative_abundance), 6),
         r.data_source,
@@ -246,7 +245,7 @@ for source, rows, sids in cursor.fetchall():
 
 cursor.execute(
     "SELECT COUNT(*) FROM GenusAbundance ga "
-    "JOIN Patient p ON ga.bbid = p.patient_id "
+    "JOIN Patient p ON ga.patient_id = p.patient_id "
     "WHERE p.data_source = 'Derosa_NSCLC' "
     "AND ga.genus IN (SELECT DISTINCT genus FROM Taxonomy WHERE sig_group != 'none')"
 )

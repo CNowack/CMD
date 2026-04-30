@@ -226,7 +226,8 @@ button:hover, input[type="submit"]:hover {
     background-color: var(--color-accent);
 }
 
-/* Tables — pulled from HW4/HW5 table conventions */
+
+/* Tables */
 table {
     margin: var(--space-lg);
     border-collapse: collapse;

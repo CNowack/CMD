@@ -1,0 +1,964 @@
+{% extends "base.html" %}
+
+{% block title %}Meta-Analysis — CMD{% endblock %}
+
+{% block head_extra %}
+<style>
+/* ── buttons ─────────────────────────────────────────────── */
+.run-btn {
+    padding: 0.5rem 1.6rem;
+    background: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.run-btn:hover    { background: #2a6ed4; }
+.run-btn:disabled { background: #aaa; cursor: not-allowed; }
+
+.select-btn {
+    padding: 0.15rem 0.65rem;
+    font-size: 0.82em;
+    border: 1px solid #4285f4;
+    border-radius: 999px;
+    background: #fff;
+    color: #4285f4;
+    cursor: pointer;
+    line-height: 1.6;
+}
+.select-btn:hover {
+    background: #4285f4;
+    color: #fff;
+}
+
+/* ── pre-run genus form ──────────────────────────────────── */
+.genus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+}
+.genus-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.8rem 0.9rem;
+}
+.genus-box-header {
+    font-weight: bold;
+    font-size: 0.95em;
+    color: #334455;
+    margin-bottom: 0.55rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid #eee;
+}
+.genus-box-header span {
+    font-weight: normal;
+    font-size: 0.83em;
+    color: #888;
+    margin-left: 0.35rem;
+}
+.genus-search {
+    width: 100%;
+    padding: 0.28rem 0.5rem;
+    font-size: 0.88em;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-bottom: 0.4rem;
+}
+.genus-select-row {
+    font-size: 0.88em;
+    margin-bottom: 0.35rem;
+}
+.checkbox-list {
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+}
+.checkbox-list label { display: block; white-space: nowrap; line-height: 1.8; font-size: 0.88em; }
+
+/* ── results panel controls ──────────────────────────────── */
+.results-controls {
+    padding-bottom: 0.9rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+.control-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.55rem;
+}
+.control-row:last-child { margin-bottom: 0; }
+.control-label {
+    font-weight: bold;
+    font-size: 0.9em;
+    min-width: 7rem;
+}
+.control-row label { font-size: 0.9em; }
+.check-inline       { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin-top: 0.3rem; }
+.check-inline label { white-space: nowrap; font-size: 0.88em; }
+
+/* ── SIG sections ────────────────────────────────────────── */
+.sig-section {
+    margin-top: 1.6rem;
+    padding-top: 0.5rem;
+    border-top: 2px solid #334455;
+}
+.sig-header {
+    font-size: 1em;
+    font-weight: bold;
+    color: #334455;
+    margin-bottom: 0.85rem;
+}
+
+/* ── side-by-side chart row (60 / 40) ───────────────────── */
+.charts-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1rem;
+    align-items: start;
+}
+.chart-col-title {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #334455;
+    padding-bottom: 0.28rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid #ddd;
+}
+.chart-col-title span {
+    font-weight: normal;
+    font-size: 0.82em;
+    color: #888;
+    margin-left: 0.35rem;
+}
+.chart-div { height: 460px; }
+
+/* ── hide-zero row ───────────────────────────────────────── */
+.hide-zero-row {
+    margin: 1.2rem 0 0.5rem;
+    font-size: 0.9em;
+}
+
+/* ── collapsible data tables ─────────────────────────────── */
+.table-details { margin-top: 0.5rem; }
+.table-details > summary {
+    cursor: pointer;
+    color: #4285f4;
+    font-size: 0.88em;
+    user-select: none;
+    list-style: none;
+    display: inline-block;
+}
+.table-details > summary::-webkit-details-marker { display: none; }
+.table-details > summary::before       { content: '▸ '; }
+.table-details[open] > summary::before { content: '▾ '; }
+.table-details > summary:hover { text-decoration: underline; }
+
+.table-sig-section { margin-top: 1rem; }
+.table-sig-header {
+    font-weight: bold;
+    font-size: 0.88em;
+    color: #334455;
+    margin-bottom: 0.4rem;
+}
+.table-pair {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1rem;
+}
+.table-sub-label {
+    font-weight: bold;
+    font-size: 0.83em;
+    color: #555;
+    margin: 0 0 0.25rem;
+}
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82em;
+}
+.stats-table th,
+.stats-table td {
+    border: 1px solid #ddd;
+    padding: 0.25rem 0.55rem;
+    text-align: right;
+}
+.stats-table th {
+    background: #f4f4f4;
+    color: #333;
+    font-weight: 600;
+}
+.stats-table td:nth-child(-n+2),
+.stats-table th:nth-child(-n+2)         { text-align: left; }
+
+
+.table-sub-label {
+    font-weight: bold;
+    font-size: 0.83em;
+    color: #555;
+    margin: 0 0 0.25rem;
+}
+
+.csv-btn {
+    padding: 0.15rem 0.55rem;
+    font-size: 0.78em;
+    border: 1px solid #4285f4;
+    border-radius: 3px;
+    background: #fff;
+    color: #4285f4;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+.csv-btn:hover {
+    background: #4285f4;
+    color: #fff;
+}
+
+/* ── platform note ───────────────────────────────────────── */
+.method-note {
+    font-size: 0.84em;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 3px;
+    padding: 0.5rem 0.9rem;
+    margin-top: 1.5rem;
+    line-height: 1.55;
+}
+
+
+
+/* ── analysis params (pre-run) ───────────────────────────── */
+.analysis-params {
+    margin: 0.9rem 0 1.1rem;
+    padding: 0.75rem 0.9rem;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+.param-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem 1rem;
+    margin-bottom: 0.45rem;
+}
+.param-row:last-child { margin-bottom: 0; }
+.param-label {
+    font-weight: bold;
+    font-size: 0.88em;
+    min-width: 9rem;
+    color: #334455;
+}
+.param-row label { font-size: 0.88em; }
+.param-note { font-size: 0.8em; color: #888; }
+
+/* ── status / error ──────────────────────────────────────── */
+#load_msg  { color: #888; font-style: italic; }
+#error_msg { color: #c00; margin-top: 0.5rem; display: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2>SIG1/SIG2 Microbiome Signature Search — Prevalence Meta-analysis</h2>
+
+<div class="panel">
+    <p>
+        The composition of the gut microbiome at treatment initiation has been shown to predict response to immune checkpoint blockade (ICB) 
+        across multiple cancer types. <a href="https://www.cell.com/cell/fulltext/S0092-8674(24)00538-5" target="_blank" rel="noopener noreferrer">Derosa et al. (Cell, 2024)</a> identified two mutually exclusive microbial communities in advanced NSCLC patients. 
+        SIG1, comprising 37 species associated with gut dysbiosis and poor immunotherapy response, and SIG2, comprising 45 species associated with a 
+        healthy gut ecosystem and favorable ICB outcomes. Patients dominated by SIG1 genera at baseline had significantly shorter overall survival on 
+        anti-PD-1/PD-L1 therapy independent of PD-L1 expression, antibiotic use, and performance status. The analysis below applies this framework to 
+        the BMC cancer microbiome cohort, asking whether the same immunotherapy-relevant genera are detected across cancer types beyond NSCLC. <br>
+        <br>
+        This meta-analysis is purely exploratory and hypothesis generating. Because the BMC cohort used 16S rRNA amplicon sequencing and the Derosa cohort 
+        used shotgun metagenomics, abundance values are not directly comparable. Instead, genus-level presence/absence, shown here as prevalence, was utilized 
+        to explore these genera. Presence of a genus is defined as relative genus abundance > 0. The Derosa NSCLC cohort serves as a validated reference while the BMC cohort is hypothesis-generating.
+    </p>
+</div>
+
+<!-- ── Pre-run: genus selectors ───────────────────────────── -->
+<div class="panel">
+    <p id="load_msg">Loading genus list…</p>
+    <p id="error_msg"></p>
+    <p>
+        Select the genera you want to examine, then click <strong>Run Analysis</strong>.
+        Additional filtering by group (cancer category or overall survival), timepoint, and sample type within the BMC cohort is available. Please note that the Derosa NSCLC cohort is a single reference cohort of only stool samples at baseline timepoint.
+    </p>
+    <div id="genus_form" style="display:none">
+        <div class="genus-grid">
+
+            <!-- SIG1 -->
+            <div class="genus-box">
+                <div class="genus-box-header">
+                    SIG1
+                    <span>Poor immunotherapy response</span>
+                </div>
+                <input type="text" class="genus-search" id="sig1_search"
+                       placeholder="Search SIG1" autocomplete="off">
+                <div class="genus-select-row">
+                    <label>
+                        <input type="checkbox" id="sig1_select_all">
+                        Select all
+                    </label>
+                </div>
+                <div class="checkbox-list" id="sig1_checks"></div>
+            </div>
+
+            <!-- SIG2 -->
+            <div class="genus-box">
+                <div class="genus-box-header">
+                    SIG2
+                    <span>Good immunotherapy response</span>
+                </div>
+                <input type="text" class="genus-search" id="sig2_search"
+                       placeholder="Search SIG2" autocomplete="off">
+                <div class="genus-select-row">
+                    <label>
+                        <input type="checkbox" id="sig2_select_all">
+                        Select all
+                    </label>
+                </div>
+                <div class="checkbox-list" id="sig2_checks"></div>
+            </div>
+
+        </div>
+
+        <!-- Analysis parameters -->
+        <div class="analysis-params">
+            <div class="param-row">
+                <span class="param-label">Group by:</span>
+                <label><input type="radio" name="analysis_view" value="overall" checked> Cancer Category</label>
+                <label><input type="radio" name="analysis_view" value="os12"> Overall Survival</label>
+            </div>
+            <div class="param-row">
+                <span class="param-label">Timepoint:</span>
+                <label><input type="radio" name="analysis_timepoint" value="Baseline" checked> Baseline</label>
+                <label><input type="radio" name="analysis_timepoint" value="Follow Up"> Follow Up</label>
+                <label><input type="radio" name="analysis_timepoint" value="Progression"> Progression</label>
+                <label><input type="radio" name="analysis_timepoint" value="All"> All</label>
+            </div>
+            <div class="param-row">
+                <span class="param-label">Sample type (BMC):</span>
+                <label><input type="radio" name="analysis_stype" value="stool" checked> Stool</label>
+                <label><input type="radio" name="analysis_stype" value="buccal"> Buccal</label>
+                <label><input type="radio" name="analysis_stype" value="nasal"> Nasal</label>
+                <label><input type="radio" name="analysis_stype" value="all"> All</label>
+                <span class="param-note">(Derosa: stool only)</span>
+            </div>
+        </div>
+
+        <button type="button" id="run_btn" class="run-btn">Run Analysis</button>
+    </div>
+</div>
+
+<!-- ══════════════════ RESULTS (shown after first run) ═══════════════ -->
+<div id="results_area" class="panel" style="display:none">
+
+    <!-- ── controls ───────────────────────────────────────── -->
+    <div class="results-controls">
+        <div class="control-row">
+            <span class="control-label">Show:</span>
+            <label><input type="radio" name="sig_view" value="sig1"> SIG1</label>
+            <label><input type="radio" name="sig_view" value="sig2"> SIG2</label>
+            <label><input type="radio" name="sig_view" value="both" checked> Both</label>
+        </div>
+        <div class="control-row">
+            <span class="control-label" id="cat_label">Cancer categories:</span>
+            <button type="button" id="cat_all"  class="select-btn">All</button>
+            <button type="button" id="cat_none" class="select-btn">None</button>
+        </div>
+        <div id="cat_checks" class="check-inline"></div>
+    </div>
+
+    <!-- ── hide-zero + data tables ────────────────────────── -->
+    <div class="hide-zero-row">
+        <label>
+            <input type="checkbox" id="hide_zero" checked>
+            Hide genus with zero prevalence in all selected groups
+        </label>
+    </div>
+
+    <!-- ── SIG1 charts + tables ────────────────────────────────── -->
+    <div class="sig-section" id="sig1_section">
+        <div class="sig-header">SIG1 &mdash; Poor immunotherapy response genera</div>
+        <div class="charts-row">
+            <div>
+                <div class="chart-col-title">
+                    BMC Cohort
+                    <span class="bmc-chart-subtitle">16S amplicon · stool · baseline</span>
+                </div>
+                <div id="bmc_sig1_chart" class="chart-div"></div>
+            </div>
+            <div>
+                <div class="chart-col-title">
+                    Derosa NSCLC
+                    <span class="derosa-chart-subtitle">shotgun metagenomics · stool · baseline</span>
+                </div>
+                <div id="derosa_sig1_chart" class="chart-div"></div>
+            </div>
+        </div>
+
+        <details class="table-details">
+            <summary>Show data tables</summary>
+            <div class="table-sig-section" id="sig1_tables">
+                <div class="table-pair">
+                    <div>
+                        <p class="table-sub-label">BMC <button type="button" class="csv-btn" id="bmc_sig1_csv">CSV</button></p>
+                        <table class="stats-table">
+                            <thead><tr>
+                                <th>Genus</th><th>Category</th>
+                                <th>Detected</th><th>Total</th><th>Prevalence %</th>
+                            </tr></thead>
+                            <tbody id="bmc_sig1_body"></tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <p class="table-sub-label">Derosa NSCLC <button type="button" class="csv-btn" id="derosa_sig1_csv">CSV</button></p>
+                        <table class="stats-table">
+                            <thead id="derosa_sig1_thead"><tr>
+                                <th>Genus</th>
+                                <th>Detected</th><th>Total</th><th>Prevalence %</th>
+                            </tr></thead>
+                            <tbody id="derosa_sig1_body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- ── SIG2 charts + tables ────────────────────────────────── -->
+    <div class="sig-section" id="sig2_section">
+        <div class="sig-header">SIG2 &mdash; Good immunotherapy response genera</div>
+        <div class="charts-row">
+            <div>
+                <div class="chart-col-title">
+                    BMC Cohort
+                    <span class="bmc-chart-subtitle">16S amplicon · stool · baseline</span>
+                </div>
+                <div id="bmc_sig2_chart" class="chart-div"></div>
+            </div>
+            <div>
+                <div class="chart-col-title">
+                    Derosa NSCLC
+                    <span class="derosa-chart-subtitle">shotgun metagenomics · stool · baseline</span>
+                </div>
+                <div id="derosa_sig2_chart" class="chart-div"></div>
+            </div>
+        </div>
+
+        <details class="table-details">
+            <summary>Show data tables</summary>
+            <div class="table-sig-section" id="sig2_tables">
+                <div class="table-pair">
+                    <div>
+                        <p class="table-sub-label">BMC <button type="button" class="csv-btn" id="bmc_sig2_csv">CSV</button></p>
+                        <table class="stats-table">
+                            <thead><tr>
+                                <th>Genus</th><th>Category</th>
+                                <th>Detected</th><th>Total</th><th>Prevalence %</th>
+                            </tr></thead>
+                            <tbody id="bmc_sig2_body"></tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <p class="table-sub-label">Derosa NSCLC <button type="button" class="csv-btn" id="derosa_sig2_csv">CSV</button></p>
+                        <table class="stats-table">
+                            <thead id="derosa_sig2_thead"><tr>
+                                <th>Genus</th>
+                                <th>Detected</th><th>Total</th><th>Prevalence %</th>
+                            </tr></thead>
+                            <tbody id="derosa_sig2_body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- ── Platform note (bottom of page) ────────────────────── -->
+<p class="method-note">
+    <strong>Platform note:</strong>
+    The BMC cohort used 16S amplicon sequencing (processed using QIIME2/DADA2);
+    the Derosa NSCLC cohort used shotgun metagenomics (processed using MetaPhlAn&nbsp;4).
+    Detection sensitivity and taxonomic resolution differ between sequencing platforms. Any cross cohort interpretations should be made with caution. 
+</p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+google.charts.load('current', { packages: ['corechart'] });
+google.charts.setOnLoadCallback(init);
+
+var rawData       = null;
+var resultsWired  = false;  /* guard: wire results-area handlers only once */
+
+var BMC_CAT_COLORS = {
+    'Head and Neck':            '#9334e6',
+    'Hepatocellular Carcinoma': '#f9ab00',
+    'Melanoma':                 '#34a853',
+    'NSCLC':                    '#ea4335',
+    'Other':                    '#4285f4',
+};
+var OS12_COLORS  = { 'OS<12': '#ea4335', 'OS≥12': '#34a853' };
+var DEROSA_COLOR = '#0097a7';
+
+var lastFiltered = { bmc1: [], bmc2: [], derosa1: [], derosa2: [] };
+
+function buildBmcCsvRows(genera) {
+    var rows = [['Genus', 'Category', 'Detected', 'Total', 'Prevalence %']];
+    genera.forEach(function (g) {
+        g.groups.forEach(function (grp) {
+            rows.push([g.genus, grp.label, grp.n_detected, grp.n_total, grp.prevalence.toFixed(1)]);
+        });
+    });
+    return rows;
+}
+
+function buildDerosaCsvRows(genera) {
+    /* OS12 grouped format reuses the BMC CSV builder */
+    if (genera.length && genera[0].groups !== undefined) {
+        return buildBmcCsvRows(genera);
+    }
+    var rows = [['Genus', 'Detected', 'Total', 'Prevalence %']];
+    genera.forEach(function (g) {
+        rows.push([g.genus, g.n_detected, g.n_total, g.prevalence.toFixed(1)]);
+    });
+    return rows;
+}
+
+function downloadCsv(filename, rows) {
+    var csv = rows.map(function (row) {
+        return row.map(function (cell) {
+            var str = String(cell);
+            /* wrap in quotes if cell contains comma, quote, or newline */
+            if (/[,"\n]/.test(str)) str = '"' + str.replace(/"/g, '""') + '"';
+            return str;
+        }).join(',');
+    }).join('\n');
+
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href     = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+/* ── initialise: load filters, wire run button ────────────── */
+
+function init() {
+    $.getJSON('/api/meta1_filters', function (filters) {
+        setupGenusList('sig1_checks', 'sig1_genus', 'sig1_search', 'sig1_select_all', filters.sig1_genera);
+        setupGenusList('sig2_checks', 'sig2_genus', 'sig2_search', 'sig2_select_all', filters.sig2_genera);
+        document.getElementById('load_msg').style.display = 'none';
+        document.getElementById('genus_form').style.display = 'block';
+    }).fail(function () {
+        document.getElementById('load_msg').textContent =
+            'Could not load genus list — is the database reachable?';
+    });
+
+    document.getElementById('run_btn').addEventListener('click', function () {
+        var s1 = checkedValues('sig1_genus');
+        var s2 = checkedValues('sig2_genus');
+        if (!s1.length && !s2.length) {
+            alert('Please select at least one genus before running the analysis.');
+            return;
+        }
+        runAnalysis();
+    });
+}
+
+/* ── genus selector setup ─────────────────────────────────── */
+
+function syncSigView() {
+    var hasSig1 = checkedValues('sig1_genus').length > 0;
+    var hasSig2 = checkedValues('sig2_genus').length > 0;
+
+    var value;
+    if (hasSig1 && hasSig2) value = 'both';
+    else if (hasSig1)        value = 'sig1';
+    else if (hasSig2)        value = 'sig2';
+    else                     return; // nothing selected — leave radio as-is
+
+    var radio = document.querySelector('input[name="sig_view"][value="' + value + '"]');
+    if (radio) radio.checked = true;
+}
+
+function setupGenusList(listId, name, searchId, selectAllId, genera) {
+    var listEl      = document.getElementById(listId);
+    var selectAllEl = document.getElementById(selectAllId);
+
+    /* build checkboxes */
+    genera.forEach(function (g) {
+        listEl.appendChild(makeCheckbox(name, g, g, false));
+    });
+
+    /* live search: show/hide labels by genus name */
+    document.getElementById(searchId).addEventListener('input', function () {
+        var q = this.value.toLowerCase();
+        Array.from(listEl.querySelectorAll('label')).forEach(function (lbl) {
+            lbl.style.display = lbl.textContent.toLowerCase().indexOf(q) !== -1 ? '' : 'none';
+        });
+    });
+
+    
+
+    // Select All toggle
+    selectAllEl.addEventListener('change', function () {
+        setAllChecks(name, this.checked);
+        syncSigView();                      // ← add
+        if (rawData) applyFilters();
+    });
+
+    // Individual checkbox changes
+    listEl.addEventListener('change', function () {
+        syncSelectAll(selectAllId, name);
+        syncSigView();                      // ← add
+        if (rawData) applyFilters();
+    });
+}
+
+function syncSelectAll(selectAllId, name) {
+    var all     = document.querySelectorAll('input[name="' + name + '"]');
+    var checked = document.querySelectorAll('input[name="' + name + '"]:checked');
+    var el      = document.getElementById(selectAllId);
+    el.checked       = (checked.length === all.length);
+    el.indeterminate = (checked.length > 0 && checked.length < all.length);
+}
+
+
+
+/* ── load data ────────────────────────────────────────────── */
+
+function runAnalysis() {
+    var btn   = document.getElementById('run_btn');
+    var errEl = document.getElementById('error_msg');
+    errEl.style.display = 'none';
+    btn.disabled    = true;
+    btn.textContent = 'Loading…';
+
+    var view   = (document.querySelector('input[name="analysis_view"]:checked')      || {}).value || 'overall';
+    var tp     = (document.querySelector('input[name="analysis_timepoint"]:checked') || {}).value || 'Baseline';
+    var stype  = (document.querySelector('input[name="analysis_stype"]:checked')     || {}).value || 'stool';
+    var params = '?view='        + encodeURIComponent(view)  +
+                 '&timepoint='   + encodeURIComponent(tp)    +
+                 '&sample_type=' + encodeURIComponent(stype);
+
+    $.getJSON('/api/meta1_data' + params, function (data) {
+        rawData = data;
+
+        if (!resultsWired) {
+            wireResultsControls();
+            resultsWired = true;
+        }
+        updateAfterRun(data);
+
+        syncSigView();
+        document.getElementById('results_area').style.display = 'block';
+        applyFilters();
+
+    }).fail(function (xhr) {
+        var msg = (xhr.responseJSON && xhr.responseJSON.error)
+            ? xhr.responseJSON.error : 'server error';
+        errEl.textContent   = 'Analysis failed: ' + msg;
+        errEl.style.display = '';
+    }).always(function () {
+        btn.disabled    = false;
+        btn.textContent = 'Run Analysis';
+    });
+}
+
+/* ── wire results-area controls (called once) ─────────────── */
+
+function wireResultsControls() {
+    /* event delegation on cat_checks container — survives checkbox rebuilds */
+    document.getElementById('cat_checks').addEventListener('change', applyFilters);
+
+    document.getElementById('hide_zero').addEventListener('change', applyFilters);
+
+    document.querySelectorAll('input[name="sig_view"]').forEach(function (r) {
+        r.addEventListener('change', applyFilters);
+    });
+
+    document.getElementById('cat_all').addEventListener('click', function () {
+        setAllChecks('cat', true); applyFilters();
+    });
+    document.getElementById('cat_none').addEventListener('click', function () {
+        setAllChecks('cat', false); applyFilters();
+    });
+
+    document.getElementById('bmc_sig1_csv').addEventListener('click', function () {
+        downloadCsv('bmc_sig1_prevalence.csv', buildBmcCsvRows(lastFiltered.bmc1));
+    });
+    document.getElementById('derosa_sig1_csv').addEventListener('click', function () {
+        downloadCsv('derosa_sig1_prevalence.csv', buildDerosaCsvRows(lastFiltered.derosa1));
+    });
+    document.getElementById('bmc_sig2_csv').addEventListener('click', function () {
+        downloadCsv('bmc_sig2_prevalence.csv', buildBmcCsvRows(lastFiltered.bmc2));
+    });
+    document.getElementById('derosa_sig2_csv').addEventListener('click', function () {
+        downloadCsv('derosa_sig2_prevalence.csv', buildDerosaCsvRows(lastFiltered.derosa2));
+    });
+}
+
+/* ── update UI after each run (category list, subtitles) ─── */
+
+function updateAfterRun(data) {
+    /* rebuild category / OS12 checkboxes */
+    var catDiv = document.getElementById('cat_checks');
+    catDiv.innerHTML = '';
+    data.bmc_categories.forEach(function (cat) {
+        catDiv.appendChild(makeCheckbox('cat', cat, cat, true));
+    });
+
+    /* category control label */
+    var catLabel = document.getElementById('cat_label');
+    if (catLabel) {
+        catLabel.textContent = (data.view === 'os12') ? 'OS12 group:' : 'Cancer categories:';
+    }
+
+    /* BMC chart subtitle */
+    var stypeLabel = (data.sample_type === 'all') ? 'all sample types' : data.sample_type;
+    var tpLabel    = data.timepoint.toLowerCase();
+    document.querySelectorAll('.bmc-chart-subtitle').forEach(function (el) {
+        el.textContent = '16S amplicon · ' + stypeLabel + ' · ' + tpLabel;
+    });
+
+    /* Derosa chart subtitle */
+    var derosaSub = 'shotgun metagenomics · stool · baseline';
+    if (data.view === 'os12') derosaSub += ' · OS12 stratified';
+    document.querySelectorAll('.derosa-chart-subtitle').forEach(function (el) {
+        el.textContent = derosaSub;
+    });
+
+    /* Derosa table headers */
+    var derosaTrHTML = (data.view === 'os12')
+        ? '<tr><th>Genus</th><th>Group</th><th>Detected</th><th>Total</th><th>Prevalence %</th></tr>'
+        : '<tr><th>Genus</th><th>Detected</th><th>Total</th><th>Prevalence %</th></tr>';
+    ['derosa_sig1_thead', 'derosa_sig2_thead'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.innerHTML = derosaTrHTML;
+    });
+}
+
+/* ── apply filters and redraw everything ─────────────────── */
+
+function applyFilters() {
+    if (!rawData) return;
+
+    var selectedCats = checkedValues('cat');
+    var selectedSig1 = checkedValues('sig1_genus');
+    var selectedSig2 = checkedValues('sig2_genus');
+    var hideZero     = document.getElementById('hide_zero').checked;
+    var sigViewVal   = (document.querySelector('input[name="sig_view"]:checked') || {}).value || 'both';
+    var isOs12       = (rawData.view === 'os12');
+
+    var showSig1 = (sigViewVal !== 'sig2');
+    var showSig2 = (sigViewVal !== 'sig1');
+
+    document.getElementById('sig1_section').style.display = showSig1 ? '' : 'none';
+    document.getElementById('sig2_section').style.display = showSig2 ? '' : 'none';
+
+    if (showSig1) {
+        lastFiltered.bmc1    = filterBmc(rawData.bmc.sig1, selectedCats, selectedSig1, hideZero);
+        lastFiltered.derosa1 = isOs12
+            ? filterBmc(rawData.derosa.sig1, selectedCats, selectedSig1, hideZero)
+            : filterDerosa(rawData.derosa.sig1, selectedSig1, hideZero);
+        drawBmcChart('bmc_sig1_chart', lastFiltered.bmc1, selectedCats);
+        if (isOs12) {
+            drawBmcChart('derosa_sig1_chart', lastFiltered.derosa1, selectedCats);
+        } else {
+            drawDerosaChart('derosa_sig1_chart', lastFiltered.derosa1);
+        }
+        buildBmcTable('bmc_sig1_body', lastFiltered.bmc1);
+        buildDerosaTable('derosa_sig1_body', lastFiltered.derosa1);
+    }
+    if (showSig2) {
+        lastFiltered.bmc2    = filterBmc(rawData.bmc.sig2, selectedCats, selectedSig2, hideZero);
+        lastFiltered.derosa2 = isOs12
+            ? filterBmc(rawData.derosa.sig2, selectedCats, selectedSig2, hideZero)
+            : filterDerosa(rawData.derosa.sig2, selectedSig2, hideZero);
+        drawBmcChart('bmc_sig2_chart', lastFiltered.bmc2, selectedCats);
+        if (isOs12) {
+            drawBmcChart('derosa_sig2_chart', lastFiltered.derosa2, selectedCats);
+        } else {
+            drawDerosaChart('derosa_sig2_chart', lastFiltered.derosa2);
+        }
+        buildBmcTable('bmc_sig2_body', lastFiltered.bmc2);
+        buildDerosaTable('derosa_sig2_body', lastFiltered.derosa2);
+    }
+}
+
+/* ── data filtering ───────────────────────────────────────── */
+
+function filterBmc(genera, selectedCats, selectedGenera, hideZero) {
+    return genera
+        .filter(function (g) { return selectedGenera.indexOf(g.genus) !== -1; })
+        .map(function (g) {
+            return {
+                genus:  g.genus,
+                groups: g.groups.filter(function (grp) {
+                    return selectedCats.indexOf(grp.label) !== -1;
+                }),
+            };
+        })
+        .filter(function (g) {
+            if (!hideZero) return true;
+            return g.groups.some(function (grp) { return grp.prevalence > 0; });
+        });
+}
+
+function filterDerosa(genera, selectedGenera, hideZero) {
+    return genera
+        .filter(function (g) { return selectedGenera.indexOf(g.genus) !== -1; })
+        .filter(function (g) {
+            if (!hideZero) return true;
+            return g.prevalence > 0;
+        });
+}
+
+/* ── chart drawing ────────────────────────────────────────── */
+
+function drawBmcChart(divId, genera, categories) {
+    var el = document.getElementById(divId);
+    if (!genera.length || !categories.length) {
+        el.innerHTML = '<p style="padding:2rem;color:#aaa;text-align:center">No genera match current filters.</p>';
+        return;
+    }
+
+    var dt = new google.visualization.DataTable();
+    dt.addColumn('string', 'Genus');
+    categories.forEach(function (cat) {
+        dt.addColumn('number', cat);
+        dt.addColumn({ type: 'string', role: 'tooltip', p: { html: true } });
+    });
+
+    genera.forEach(function (g) {
+        var groupMap = {};
+        g.groups.forEach(function (grp) { groupMap[grp.label] = grp; });
+        var row = [g.genus];
+        categories.forEach(function (cat) {
+            var grp = groupMap[cat];
+            row.push(
+                grp ? grp.prevalence : null,
+                grp ? makeTooltip(cat, g.genus, grp.n_detected, grp.n_total, grp.prevalence) : null
+            );
+        });
+        dt.addRow(row);
+    });
+
+    var colorMap = (rawData && rawData.view === 'os12') ? OS12_COLORS : BMC_CAT_COLORS;
+    var colors   = categories.map(function (c) { return colorMap[c] || '#888'; });
+
+    new google.visualization.ColumnChart(el).draw(dt, {
+        chartArea: { left: 60, right: 10, top: 30, bottom: 150 },
+        vAxis:  { title: 'Prevalence (%)', minValue: 0, maxValue: 100, gridlines: { count: 6 } },
+        hAxis:  { slantedText: true, slantedTextAngle: 45 },
+        tooltip: { isHtml: true },
+        colors:  colors,
+        legend:  { position: 'top', maxLines: 2 },
+        bar:     { groupWidth: '75%' },
+    });
+}
+
+function drawDerosaChart(divId, genera) {
+    var el = document.getElementById(divId);
+    if (!genera.length) {
+        el.innerHTML = '<p style="padding:2rem;color:#aaa;text-align:center">No genera match current filters.</p>';
+        return;
+    }
+
+    var dt = new google.visualization.DataTable();
+    dt.addColumn('string', 'Genus');
+    dt.addColumn('number', 'Derosa NSCLC');
+    dt.addColumn({ type: 'string', role: 'tooltip', p: { html: true } });
+
+    genera.forEach(function (g) {
+        dt.addRow([
+            g.genus,
+            g.prevalence,
+            makeTooltip('Derosa NSCLC', g.genus, g.n_detected, g.n_total, g.prevalence)
+        ]);
+    });
+
+    new google.visualization.ColumnChart(el).draw(dt, {
+        chartArea: { left: 60, right: 10, top: 10, bottom: 150 },
+        vAxis:  { title: 'Prevalence (%)', minValue: 0, maxValue: 100, gridlines: { count: 6 } },
+        hAxis:  { slantedText: true, slantedTextAngle: 45 },
+        tooltip: { isHtml: true },
+        colors:  [DEROSA_COLOR],
+        legend:  { position: 'none' },
+        bar:     { groupWidth: '60%' },
+    });
+}
+
+/* ── table building ───────────────────────────────────────── */
+
+function buildBmcTable(tbodyId, genera) {
+    var rows = [];
+    genera.forEach(function (g) {
+        g.groups.forEach(function (grp) {
+            rows.push(
+                '<tr><td>' + g.genus + '</td><td>' + grp.label + '</td>' +
+                '<td>' + grp.n_detected + '</td><td>' + grp.n_total + '</td>' +
+                '<td>' + grp.prevalence.toFixed(1) + '%</td></tr>'
+            );
+        });
+    });
+    document.getElementById(tbodyId).innerHTML = rows.length
+        ? rows.join('')
+        : '<tr><td colspan="5" style="text-align:center;color:#aaa">No data</td></tr>';
+}
+
+function buildDerosaTable(tbodyId, genera) {
+    /* OS12 grouped format reuses the BMC table builder */
+    if (genera.length && genera[0].groups !== undefined) {
+        buildBmcTable(tbodyId, genera);
+        return;
+    }
+    var rows = genera.map(function (g) {
+        return '<tr><td>' + g.genus + '</td><td>' + g.n_detected + '</td>' +
+               '<td>' + g.n_total + '</td><td>' + g.prevalence.toFixed(1) + '%</td></tr>';
+    });
+    document.getElementById(tbodyId).innerHTML = rows.length
+        ? rows.join('')
+        : '<tr><td colspan="4" style="text-align:center;color:#aaa">No data</td></tr>';
+}
+
+/* ── helpers ──────────────────────────────────────────────── */
+
+function makeTooltip(label, genus, nDet, nTot, prev) {
+    return '<div style="padding:8px;font-size:13px;line-height:1.5">' +
+           '<b>' + label + '</b><br><i>' + genus + '</i><br>' +
+           nDet + ' of ' + nTot + ' patients<br><b>' + prev.toFixed(1) + '%</b></div>';
+}
+
+function checkedValues(name) {
+    return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+               .map(function (el) { return el.value; });
+}
+
+function setAllChecks(name, checked) {
+    document.querySelectorAll('input[name="' + name + '"]').forEach(function (el) {
+        el.checked = checked;
+    });
+}
+
+function makeCheckbox(name, value, label, checked) {
+    var el = document.createElement('label');
+    el.innerHTML = '<input type="checkbox" name="' + name + '" value="' + value + '"' +
+                   (checked ? ' checked' : '') + '> ' + label;
+    return el;
+}
+</script>
+{% endblock %}

@@ -17,18 +17,18 @@ ORDER BY FIELD(lowest_rank,
     'species','genus','family','order','class','phylum','kingdom');
 
 -- 3. Samples per patient — should be 1–10 roughly
-SELECT bbid, COUNT(*) AS n_samples
+SELECT patient_id, COUNT(*) AS n_samples
 FROM Sample
-GROUP BY bbid
-ORDER BY n_samples DESC
+GROUP BY patient_id
+ORDER BY n_samples DESC;
 
 
 -- 4. Spot-check: one patient's full microbiome profile
 SELECT s.sample_type, s.timepoint,
        sp.genus, sp.species, o.abundance_counts
 FROM Observation o
-JOIN Sample  s  ON o.sid   = s.sid
+JOIN Sample   s  ON o.sid   = s.sid
 JOIN Taxonomy sp ON o.asvid = sp.asvid
-WHERE o.bbid = '4'
+WHERE o.patient_id = 'BMC_4'
 ORDER BY o.abundance_counts DESC
 LIMIT 20;

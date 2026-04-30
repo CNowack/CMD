@@ -1,183 +1,183 @@
-BIOBANK_ID,CANCER_TYPE,CANCER_CATEGORY,IMMUNOTHERAPY_DRUG,COMBINATION_TX,TYPE_OF_COMBINATION_TX,RESPONSE_STATUS,PFS
-4,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,183
-5,Skin Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,70
-8,Sarcoma,Other,Nivolumab,NO,,Complete/Partial Response,345
-9,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,40
-10,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,17
-11,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Deceased,42
-12,Tongue Cancer,Head and Neck,Nivolumab,NO,,Progressive Disease,42
-13,NSCLC,NSCLC,Nivolumab,NO,,Stable Disease,493
-15,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,223
-17,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,164
-18,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease,168
-19,Melanoma,Melanoma,Nivolumab,YES,Talimogene laherparepvec,Stable Disease,431
-23,Melanoma,Melanoma,Pembrolizumab,NO,,Complete/Partial Response,296
-24,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,123
-25,Melanoma,Melanoma,Nivolumab,NO,,Complete/Partial Response,210
-26,Kidney Carcinoma,Other,Nivolumab,NO,,Progressive Disease,70
-30,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,133
-32,Hypopharyngeal Cancer,Head and Neck,Pembrolizumab,NO,,Complete/Partial Response,672
-33,NSCLC,NSCLC,Nivolumab,NO,,Stable Disease,731
-34,Tonsil cancer,Head and Neck,Pembrolizumab,NO,,Stable Disease,84
-35,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,196
-36,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,156
-37,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,107
-39,Hypopharyngeal Cancer,Head and Neck,Nivolumab,NO,,Complete/Partial Response,434
-40,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab started on 10/23/29; not at baseline,Progressive Disease,61
-41,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,27
-43,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Complete/Partial Response,731
-44,Melanoma,Melanoma,Nivolumab,NO,,Complete/Partial Response,406
-46,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,70
-47,Pancreatic Carcinoma,Other,Nivolumab,NO,,Stable Disease,190
-48,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,238
-49,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,38
-50,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Pembrolizumab,NO,,Complete/Partial Response,548
-51,Melanoma,Melanoma,Nivolumab,NO,,Complete/Partial Response,392
-56,Sarcoma,Other,Nivolumab,YES,Ipilimumab,N/A,42
-59,Tonsil cancer,Head and Neck,Pembrolizumab,NO,,Complete/Partial Response,731
-61,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,546
-62,Gastric Carcinoma,Other,Pembrolizumab,NO,,Progressive Disease,119
-63,Uterine Carcinoma,Other,Pembrolizumab,YES,Lenvatinib,Deceased,38
-64,Oral Cavity,Head and Neck,Pembrolizumab,YES,"Cisplatin, Fluoruracil",Deceased,32
-65,Uterine Carcinoma,Other,Pembrolizumab,YES,Lenvatinib,Progressive Disease,140
-72,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,200
-74,Oral Cavity,Head and Neck,Nivolumab,NO,,Progressive Disease,69
-75,Gastric Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,178
-77,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,590
-80,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,731
-81,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,166
-84,Skin Carcinoma,Other,Cemiplimab,NO,,Complete/Partial Response,124
-85,NSCLC,NSCLC,Pembrolizumab,YES,"Abraxane, Carboplatin",Complete/Partial Response,605
-86,Kidney Carcinoma,Other,Pembrolizumab,YES,Axitinib,Complete/Partial Response,459
-87,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Progressive Disease,90
-88,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,271
-89,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,274
-90,NSCLC,NSCLC,Pembrolizumab,NO,,Complete/Partial Response,448
-91,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,320
-93,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased ,37
-95,Colon Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,730
-96,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease ,105
-98,Gastric Carcinoma,Other,Pembrolizumab,NO,,Progressive Disease ,42
-101,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,96
-103,Breast Carcinoma,Other,Atezolizumab,YES,Paclitaxel,Stable Disease,162
-104,NSCLC,NSCLC,Pembrolizumab,NO,,Stable Disease,119
-105,Skin Carcinoma,Other,Cemiplimab,NO,,N/A,42
-106,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,294
-109,NSCLC,NSCLC,Pembrolizumab,NO,,Complete/Partial Response,713
-110,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,803
-111,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Deceased,41
-114,Bladder Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,415
-115,Breast Carcinoma,Other,Pembrolizumab,YES,"Paclitaxel, Carboplatin, Doxorubicin, Cyclophosphamide",Complete/Partial Response,400
-117,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease,163
-120,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimumab,Stable Disease,118
-121,PEComa,Other,Nivolumab,NO,,Stable Disease,84
-122,Small Cell Lung Carcinoma,Other,Durvalumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,227
-123,Neuroendocrine Carcinoma,Other,Nivolumab,YES,Ipilimumab,Stable Disease,196
-125,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimumab,Complete/Partial Response,730
-126,Small Cell Lung Carcinoma,Other,Durvalumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,128
-127,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Stable Disease,224
-130,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,293
-131,Nasalpharyngeal Cancer,Head and Neck,Nivolumab,NO,,Stable Disease,42
-133,NSCLC,NSCLC,Pembrolizumab,YES,"Abraxane, Carboplatin",Complete/Partial Response,98
-134,Melanoma,Melanoma,Nivolumab,NO,,Stable Disease,126
-135,Bladder Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,84
-138,Gastric Carcinoma,Other,Pembrolizumab,NO,,Deceased,14
-139,Renal Cell Carcinoma,Other,Nivolumab,YES,Ipilimumab,Progressive Disease,36
-140,Prostate Cancer,Other,Pembrolizumab,YES,Leuprolide,Progressive Disease,43
-141,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,61
-142,Small Cell Lung Carcinoma,Other,Durvalumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,730
-145,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease,252
-146,Melanoma,Melanoma,Pembrolizumab,NO,,Complete/Partial Response,336
-147,Renal Cell Carcinoma,Other,Nivolumab,YES,Ipilimumab,Complete/Partial Response,83
-148,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Deceased,15
-149,Cervical Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,256
-152,Prostate Cancer,Other,Nivolumab,NO,,Stable Disease,154
-155,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,125
-156,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,189
-161,Esophageal Cancer,Head and Neck,Nivolumab,NO,,Progressive Disease,21
-165,Ampullar Cancer,Other,Pembrolizumab,NO,,Progressive Disease,42
-170,Tongue Cancer,Head and Neck,Nivolumab,NO,,Complete/Partial Response,564
-173,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,154
-174,Skin Carcinoma,Other,Cemiplimab,NO,,Progressive Disease,39
-175,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Deceased,13
-176,Maxillary Sinus Cancer,Head and Neck,Pembrolizumab,YES,"Carboplatin, Fluoruracil",Complete/Partial Response,175
-178,Breast Carcinoma,Other,Pembrolizumab,NO,,Progressive Disease,82
-27,SCC Anal,Other,Nivolumab,NO,,Deceased,42
-42,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,N/A-Hospice,35
-100,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,433
-169,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Atezolizumab,YES,Bevacizumab,N/A- never started treatment,NA
-179,SCC Oropharynx,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,212
-181,Merkel Cell Carcinoma,Other,Nivolumab,NO,,Complete/Partial Response,129
-184,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,418
-185,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,348
-189,Gastric Carcinoma,Other,Pembrolizumab,YES,"Fluorouracil, Leucovorin, Oxaliplatin, Trastuzumab",Complete/Partial Response,730
-194,SCC Nasal Cavity,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,539
-195,NSCLC,NSCLC,Nivolumab,YES,Ipilimumab,Stable Disease,132
-200,Bladder Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,224
-209,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Complete/Partial Response,456
-213,Colon Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,399
-217,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,117
-218,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimimab,Complete/Partial Response,164
-220,SCC of Gingiva,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,175
-221,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,140
-222,Kidney Carcinoma,Other,Nivolumab,YES,Cabozantinib,Complete/Partial Response,112
-223,Prostate Cancer,Other,Pembrolizumab,YES,"Denosumab, Lupron",Stable Disease,91
-224,Breast Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,210
-229,Gastric Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,730
-230,Tonsil Cancer,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,233
-238,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimumab,Progressive Disease,93
-239,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Atezolizumab,YES,Becacizumab,Stable Disease,233
-247,Prostate Cancer,Other,Pembrolizumab,YES,"Relugolix, Zometa",Progressive Disease,45
-248,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Progressive Disease,41
-253,Neuroendocrine Carcinoma,Other,Nivolumab,YES,Cabozantinib,N/A,42
-263,Esophageal Cancer,Other,Pembrolizumab,NO,,Progressive Disease,13
-264,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimimab,Progressive Disease,44
-266,Kidney Carcinoma,Other,Nivolumab,NO,,Progressive Disease,43
-269,Hodgkin's Lymphoma,Other,Pembrolizumab,NO,Only scheduled for 3 cycles then change tx,Complete/Partial Response,84
-271,NSCLC,NSCLC,Atezolizumab,NO,,Complete/Partial Response,602
-277,Breast Carcinoma,Other,Pembrolizumab,YES,"Paclitaxel, Carboplatin",Complete/Partial Response,469
-279,Tongue Cancer,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,203
-280,Hodgkin's Lymphoma,Other,Pembrolizumab,YES,Brentuximab,Complete/Partial Response,304
-286,NSCLC,NSCLC,Pembrolizumab,YES,"Paclitaxel, Carboplatin ",Complete/Partial Response,311
-287,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,220
-296,SCC of Scalp,Other,Pembrolizumab,NO,,Complete/Partial Response,154
-297,NSCLC,NSCLC,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,208
-298,NSCLC ,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,203
-304,Neuroendocrine Carcinoma,Other,Nivolumab,YES,Cabozantinib,Complete/Partial Response,273
-308,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,731
-162,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,238
-314,Vaginal Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,731
-316,Kidney Carcinoma,Other,Pembrolizumab,YES,Lenvatinib,Complete/Partial Response,535
-317,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",N/A,42
-321,Gastric Carcinoma,Other,Pembrolizumab,YES,"Trastuzumab, Fluorourical, leucovorin, Oxaliplatin",Complete/Partial Response,371
-322,Oral Cavity,Head and Neck,Pembrolizumab,YES,"Carboplatin, 5FU",Progressive Disease,62
-328,Colorecral Cancer,Other,Pembrolizumab,NO,,Progressive Disease,111
-333,Kidney Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,189
-329,Large Cell Neuroendocrine,Other,Atezolizumab,YES,"Carboplatin, Etoposide",N/A,NA
-336,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,157
-339,Adrenal,Other,Nivolumab,YES,Ipilimimab,Progressive Disease,75
-346,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,76
-349,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Abraxane",Stable Disease,115
-356,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Progressive Disease,33
-368,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Atezolizumab,YES,Becacizumab,N/A,84
-370,Melanoma,Melanoma,Nivolumab,YES,Ipilimimab,Stable Disease,245
-383,NSCLC,NSCLC,Pembrolizumab,NO,,N/A,42
-390,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Durvalumab,YES,Tremelimumab,Stable Disease,98
-391,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",N/A,63
-396,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,210
-439,Gastric Carcinoma,Other,Pembrolizumab,YES,"Oxaliplatin, Leucovorin, Fluorouracil",Stable Disease - continue to check if treatment continued,294
-454,NSCLC ,NSCLC,Durvalumab,YES,"Carboplatin, Paclitaxel",N/A,56
-465,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,65
-475,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease - continue to check if treatment continued,294
-484,Kidney Carcinoma,Other,Pembrolizumab,NO,,Stable Disease - continue to check if treatment continued,377
-498,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Durvalumab,YES,Tremelimumab,Complete/Partial Response,730
-503,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Cisplatin",Complete/Partial Response,730
-150,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Paclitaxel",N/A- never started treatment,NA
-246,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",N/A- never started treatment,NA
-270,Colon Carcinoma,Other,Durvalumab,YES,"Cisplatin, Gemcitabine",N/A- never started treatment,NA
-315,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,285
-331,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Progressive Disease,70
-374,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,296
-522,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Abraxane",Stable Disease - continue to check if treatment continued,72
-343,NSCLC,NSCLC,Pembrolizumab,NO,,Complete/Partial Response,149
-435,NSCLC,NSCLC,Nivolumab,YES,"Carboplatin, Paclitaxel",Complete/Partial Response,84
+BIOBANK_ID,CANCER_TYPE,CANCER_CATEGORY,IMMUNOTHERAPY_DRUG,COMBINATION_TX,TYPE_OF_COMBINATION_TX,RESPONSE_STATUS,PFS,OS_months
+4,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,183,24.03261334
+5,Skin Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,70,24.03261334
+8,Sarcoma,Other,Nivolumab,NO,,Complete/Partial Response,345,24.03261334
+9,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,40,1.315054082
+10,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,17,0.558897985
+11,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Deceased,42,1.906828418
+12,Tongue Cancer,Head and Neck,Nivolumab,NO,,Progressive Disease,42,3.123253444
+13,NSCLC,NSCLC,Nivolumab,NO,,Stable Disease,493,16.20804156
+15,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,223,24.03261334
+17,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,164,8.54785153
+18,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease,168,24.03261334
+19,Melanoma,Melanoma,Nivolumab,YES,Talimogene laherparepvec,Stable Disease,431,24.03261334
+23,Melanoma,Melanoma,Pembrolizumab,NO,,Complete/Partial Response,296,21.92852681
+24,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,123,4.701318342
+25,Melanoma,Melanoma,Nivolumab,NO,,Complete/Partial Response,210,6.904033928
+26,Kidney Carcinoma,Other,Nivolumab,NO,,Progressive Disease,70,5.950619719
+30,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,133,24.03261334
+32,Hypopharyngeal Cancer,Head and Neck,Pembrolizumab,NO,,Complete/Partial Response,672,24.03261334
+33,NSCLC,NSCLC,Nivolumab,NO,,Stable Disease,731,23.70384982
+34,Tonsil cancer,Head and Neck,Pembrolizumab,NO,,Stable Disease,84,2.761613571
+35,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,196,6.805404872
+36,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,156,10.81631982
+37,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,107,24.03261334
+39,Hypopharyngeal Cancer,Head and Neck,Nivolumab,NO,,Complete/Partial Response,434,24.03261334
+40,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab started on 10/23/29; not at baseline,Progressive Disease,61,9.205378571
+41,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,27,0.887661505
+43,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Complete/Partial Response,731,24.03261334
+44,Melanoma,Melanoma,Nivolumab,NO,,Complete/Partial Response,406,24.03261334
+46,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,70,24.03261334
+47,Pancreatic Carcinoma,Other,Nivolumab,NO,,Stable Disease,190,15.2875037
+48,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,238,12.19712661
+49,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased,38,1.249301378
+50,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Pembrolizumab,NO,,Complete/Partial Response,548,24.03261334
+51,Melanoma,Melanoma,Nivolumab,NO,,Complete/Partial Response,392,24.03261334
+56,Sarcoma,Other,Nivolumab,YES,Ipilimumab,N/A,42,6.213630536
+59,Tonsil cancer,Head and Neck,Pembrolizumab,NO,,Complete/Partial Response,731,24.03261334
+61,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,546,17.95048821
+62,Gastric Carcinoma,Other,Pembrolizumab,NO,,Progressive Disease,119,6.871157576
+63,Uterine Carcinoma,Other,Pembrolizumab,YES,Lenvatinib,Deceased,38,1.249301378
+64,Oral Cavity,Head and Neck,Pembrolizumab,YES,"Cisplatin, Fluoruracil",Deceased,32,1.052043265
+65,Uterine Carcinoma,Other,Pembrolizumab,YES,Lenvatinib,Progressive Disease,140,13.97244962
+72,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,200,21.92852681
+74,Oral Cavity,Head and Neck,Nivolumab,NO,,Progressive Disease,69,24.03261334
+75,Gastric Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,178,8.679356939
+77,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,590,24.03261334
+80,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,731,24.03261334
+81,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,166,13.05191176
+84,Skin Carcinoma,Other,Cemiplimab,NO,,Complete/Partial Response,124,24.03261334
+85,NSCLC,NSCLC,Pembrolizumab,YES,"Abraxane, Carboplatin",Complete/Partial Response,605,19.89019298
+86,Kidney Carcinoma,Other,Pembrolizumab,YES,Axitinib,Complete/Partial Response,459,20.48196732
+87,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Progressive Disease,90,8.679356939
+88,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,271,13.7094388
+89,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,274,15.41900911
+90,NSCLC,NSCLC,Pembrolizumab,NO,,Complete/Partial Response,448,24.03261334
+91,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,320,20.48196732
+93,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Deceased ,37,1.216425025
+95,Colon Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,730,23.99973699
+96,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease ,105,3.978038597
+98,Gastric Carcinoma,Other,Pembrolizumab,NO,,Progressive Disease ,42,4.142420357
+101,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,96,18.67376796
+103,Breast Carcinoma,Other,Atezolizumab,YES,Paclitaxel,Stable Disease,162,15.02449288
+104,NSCLC,NSCLC,Pembrolizumab,NO,,Stable Disease,119,4.142420357
+105,Skin Carcinoma,Other,Cemiplimab,NO,,N/A,42,17.06282671
+106,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,294,23.99973699
+109,NSCLC,NSCLC,Pembrolizumab,NO,,Complete/Partial Response,713,23.99973699
+110,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,803,23.99973699
+111,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Deceased,41,1.347930434
+114,Bladder Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,415,23.99973699
+115,Breast Carcinoma,Other,Pembrolizumab,YES,"Paclitaxel, Carboplatin, Doxorubicin, Cyclophosphamide",Complete/Partial Response,400,23.99973699
+117,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease,163,5.358845383
+120,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimumab,Stable Disease,118,14.30121314
+121,PEComa,Other,Nivolumab,NO,,Stable Disease,84,14.4655949
+122,Small Cell Lung Carcinoma,Other,Durvalumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,227,22.02715587
+123,Neuroendocrine Carcinoma,Other,Nivolumab,YES,Ipilimumab,Stable Disease,196,6.673899464
+125,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimumab,Complete/Partial Response,730,23.99973699
+126,Small Cell Lung Carcinoma,Other,Durvalumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,128,19.56142946
+127,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Stable Disease,224,12.52589013
+130,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,293,10.78344347
+131,Nasalpharyngeal Cancer,Head and Neck,Nivolumab,NO,,Stable Disease,42,20.25183286
+133,NSCLC,NSCLC,Pembrolizumab,YES,"Abraxane, Carboplatin",Complete/Partial Response,98,4.142420357
+134,Melanoma,Melanoma,Nivolumab,NO,,Stable Disease,126,19.72581122
+135,Bladder Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,84,16.66831048
+138,Gastric Carcinoma,Other,Pembrolizumab,NO,,Deceased,14,0.460268929
+139,Renal Cell Carcinoma,Other,Nivolumab,YES,Ipilimumab,Progressive Disease,36,3.2218825
+140,Prostate Cancer,Other,Pembrolizumab,YES,Leuprolide,Progressive Disease,43,2.399973699
+141,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,61,2.005457474
+142,Small Cell Lung Carcinoma,Other,Durvalumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,730,23.99973699
+145,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease,252,23.99973699
+146,Melanoma,Melanoma,Pembrolizumab,NO,,Complete/Partial Response,336,23.99973699
+147,Renal Cell Carcinoma,Other,Nivolumab,YES,Ipilimumab,Complete/Partial Response,83,23.99973699
+148,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Deceased,15,0.493145281
+149,Cervical Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,256,11.14508334
+152,Prostate Cancer,Other,Nivolumab,NO,,Stable Disease,154,23.99973699
+155,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,125,11.07933064
+156,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,189,23.99973699
+161,Esophageal Cancer,Head and Neck,Nivolumab,NO,,Progressive Disease,21,3.484893316
+165,Ampullar Cancer,Other,Pembrolizumab,NO,,Progressive Disease,42,6.476641352
+170,Tongue Cancer,Head and Neck,Nivolumab,NO,,Complete/Partial Response,564,24.69014038
+173,Small Cell Lung Carcinoma,Other,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,154,5.095834566
+174,Skin Carcinoma,Other,Cemiplimab,NO,,Progressive Disease,39,2.827366275
+175,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Deceased,13,0.427392577
+176,Maxillary Sinus Cancer,Head and Neck,Pembrolizumab,YES,"Carboplatin, Fluoruracil",Complete/Partial Response,175,23.99973699
+178,Breast Carcinoma,Other,Pembrolizumab,NO,,Progressive Disease,82,5.654732551
+27,SCC Anal,Other,Nivolumab,NO,,Deceased,42,2.564355459
+42,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,N/A-Hospice,35,1.150672321
+100,NSCLC,NSCLC,Durvalumab,NO,,Complete/Partial Response,433,23.99973699
+169,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Atezolizumab,YES,Bevacizumab,N/A- never started treatment,NA,#VALUE!
+179,SCC Oropharynx,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,212,23.99973699
+181,Merkel Cell Carcinoma,Other,Nivolumab,NO,,Complete/Partial Response,129,21.50113423
+184,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,418,13.74231515
+185,Melanoma,Melanoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,348,23.99973699
+189,Gastric Carcinoma,Other,Pembrolizumab,YES,"Fluorouracil, Leucovorin, Oxaliplatin, Trastuzumab",Complete/Partial Response,730,23.99973699
+194,SCC Nasal Cavity,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,539,23.99973699
+195,NSCLC,NSCLC,Nivolumab,YES,Ipilimumab,Stable Disease,132,7.298550153
+200,Bladder Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,224,14.72860571
+209,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Complete/Partial Response,456,23.99973699
+213,Colon Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,399,21.82989775
+217,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Progressive Disease,117,4.175296709
+218,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimimab,Complete/Partial Response,164,23.99973699
+220,SCC of Gingiva,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,175,6.345135944
+221,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,140,23.99973699
+222,Kidney Carcinoma,Other,Nivolumab,YES,Cabozantinib,Complete/Partial Response,112,14.5313476
+223,Prostate Cancer,Other,Pembrolizumab,YES,"Denosumab, Lupron",Stable Disease,91,23.99973699
+224,Breast Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,210,23.99973699
+229,Gastric Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,730,23.99973699
+230,Tonsil Cancer,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,233,23.04632278
+238,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimumab,Progressive Disease,93,8.38346977
+239,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Atezolizumab,YES,Becacizumab,Stable Disease,233,23.99973699
+247,Prostate Cancer,Other,Pembrolizumab,YES,"Relugolix, Zometa",Progressive Disease,45,5.095834566
+248,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Progressive Disease,41,15.41900911
+253,Neuroendocrine Carcinoma,Other,Nivolumab,YES,Cabozantinib,N/A,42,4.142420357
+263,Esophageal Cancer,Other,Pembrolizumab,NO,,Progressive Disease,13,3.452016964
+264,Kidney Carcinoma,Other,Nivolumab,YES,Ipilimimab,Progressive Disease,44,11.04645429
+266,Kidney Carcinoma,Other,Nivolumab,NO,,Progressive Disease,43,2.367097347
+269,Hodgkin's Lymphoma,Other,Pembrolizumab,NO,Only scheduled for 3 cycles then change tx,Complete/Partial Response,84,24.03261334
+271,NSCLC,NSCLC,Atezolizumab,NO,,Complete/Partial Response,602,24.03261334
+277,Breast Carcinoma,Other,Pembrolizumab,YES,"Paclitaxel, Carboplatin",Complete/Partial Response,469,24.03261334
+279,Tongue Cancer,Head and Neck,Pembrolizumab,YES,"Fluorouracil, Carboplatin",Complete/Partial Response,203,12.52589013
+280,Hodgkin's Lymphoma,Other,Pembrolizumab,YES,Brentuximab,Complete/Partial Response,304,17.95048821
+286,NSCLC,NSCLC,Pembrolizumab,YES,"Paclitaxel, Carboplatin ",Complete/Partial Response,311,24.03261334
+287,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,220,7.232797449
+296,SCC of Scalp,Other,Pembrolizumab,NO,,Complete/Partial Response,154,24.03261334
+297,NSCLC,NSCLC,Atezolizumab,YES,"Carboplatin, Etoposide",Complete/Partial Response,208,9.008120459
+298,NSCLC ,NSCLC,Pembrolizumab,YES,"Pemetrexed, Carboplatin",Complete/Partial Response,203,24.03261334
+304,Neuroendocrine Carcinoma,Other,Nivolumab,YES,Cabozantinib,Complete/Partial Response,273,15.94503074
+308,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,731,24.03261334
+162,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,YES,Ipilimumab,Complete/Partial Response,238,24.03261334
+314,Vaginal Carcinoma,Other,Pembrolizumab,NO,,Complete/Partial Response,731,24.03261334
+316,Kidney Carcinoma,Other,Pembrolizumab,YES,Lenvatinib,Complete/Partial Response,535,18.18062268
+317,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",N/A,42,7.232797449
+321,Gastric Carcinoma,Other,Pembrolizumab,YES,"Trastuzumab, Fluorourical, leucovorin, Oxaliplatin",Complete/Partial Response,371,24.03261334
+322,Oral Cavity,Head and Neck,Pembrolizumab,YES,"Carboplatin, 5FU",Progressive Disease,62,2.038333826
+328,Colorecral Cancer,Other,Pembrolizumab,NO,,Progressive Disease,111,11.96699214
+333,Kidney Carcinoma,Other,Pembrolizumab,NO,,Stable Disease,189,24.03261334
+329,Large Cell Neuroendocrine,Other,Atezolizumab,YES,"Carboplatin, Etoposide",N/A,NA,
+336,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,157,11.11220699
+339,Adrenal,Other,Nivolumab,YES,Ipilimimab,Progressive Disease,75,5.260216326
+346,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,76,2.498602755
+349,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Abraxane",Stable Disease,115,6.147877831
+356,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Progressive Disease,33,1.084919617
+368,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Atezolizumab,YES,Becacizumab,N/A,84,23.60522076
+370,Melanoma,Melanoma,Nivolumab,YES,Ipilimimab,Stable Disease,245,16.50392872
+383,NSCLC,NSCLC,Pembrolizumab,NO,,N/A,42,13.47930434
+390,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Durvalumab,YES,Tremelimumab,Stable Disease,98,18.87102607
+391,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",N/A,63,20.67922543
+396,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Complete/Partial Response,210,11.93411579
+439,Gastric Carcinoma,Other,Pembrolizumab,YES,"Oxaliplatin, Leucovorin, Fluorouracil",Stable Disease - continue to check if treatment continued,294,11.96699214
+454,NSCLC ,NSCLC,Durvalumab,YES,"Carboplatin, Paclitaxel",N/A,56,13.80806786
+465,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,65,3.978038597
+475,Melanoma,Melanoma,Pembrolizumab,NO,,Stable Disease - continue to check if treatment continued,294,12.78890094
+484,Kidney Carcinoma,Other,Pembrolizumab,NO,,Stable Disease - continue to check if treatment continued,377,11.01357793
+498,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Durvalumab,YES,Tremelimumab,Complete/Partial Response,730,11.04645429
+503,NSCLC,NSCLC,Pembrolizumab,YES,"Pemetrexed, Cisplatin",Complete/Partial Response,730,10.81631982
+150,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Paclitaxel",N/A- never started treatment,NA,
+246,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",N/A- never started treatment,NA,
+270,Colon Carcinoma,Other,Durvalumab,YES,"Cisplatin, Gemcitabine",N/A- never started treatment,NA,
+315,Hepatocellular Carcinoma,Hepatocellular Carcinoma,Nivolumab,NO,,Stable Disease,285,23.73672617
+331,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Progressive Disease,70,11.11220699
+374,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Pemetrexed",Stable Disease,296,22.65180656
+522,NSCLC,NSCLC,Pembrolizumab,YES,"Carboplatin, Abraxane",Stable Disease - continue to check if treatment continued,72,3.05750074
+343,NSCLC,NSCLC,Pembrolizumab,NO,,Complete/Partial Response,149,23.76960252
+435,NSCLC,NSCLC,Nivolumab,YES,"Carboplatin, Paclitaxel",Complete/Partial Response,84,17.02995036

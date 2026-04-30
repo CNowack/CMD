@@ -158,6 +158,7 @@ df = df.rename(columns={
     "TYPE_OF_COMBINATION_TX": "type_of_combination_tx",
     "RESPONSE_STATUS":      "response_status_raw_col",
     "PFS":                  "PFS",
+    "OS_months":            "OS_months"
 })
 df = df[df["source_id"].notna()]
 
@@ -170,8 +171,8 @@ sql = """
         cancer_type, cancer_category,
         immunotherapy, combination_tx, type_of_combination_tx,
         response_status, response_status_raw,
-        PFS
-    ) VALUES (%s,%s,%s, %s,%s, %s,%s,%s, %s,%s, %s)
+        PFS, OS_months
+    ) VALUES (%s,%s,%s, %s,%s, %s,%s,%s, %s,%s, %s, %s)
 """
 
 rows = []
@@ -189,6 +190,7 @@ for _, row in df.iterrows():
         resp_h,
         resp_raw,
         clean(row.get("PFS")),
+        clean(row.get("OS_months")),
     ))
 
 cursor.executemany(sql, rows)
@@ -305,7 +307,7 @@ df["patient_id"] = "BMC_" + df["bbid"].astype(int).astype(str)
 
 sql = """
     INSERT IGNORE INTO Sample
-        (sid, bbid, sample_type, timepoint,
+        (sid, patient_id, sample_type, timepoint,
          sequencing_batch, days_from_treatment)
     VALUES (%s,%s,%s,%s,%s,%s)
 """
@@ -370,7 +372,7 @@ rel_long = rel_long[rel_long["relative_abundance"] > 0][["asvid", "sid", "relati
 # ── 4c. Merge counts and relative abundance ───────────────────────────────────
 merged = counts_long.merge(rel_long, on=["asvid", "sid"], how="left")
 
-# Join bbid (patient_id) from sample map
+# Join patient_id from sample map
 sample_map = pd.read_csv(
     os.path.join(BMC_DIR, "sample_metadata.csv"),
     usecols=["sid", "bbid"]
@@ -385,7 +387,7 @@ if missing_patients:
 
 sql = """
     INSERT IGNORE INTO Observation
-        (sid, asvid, bbid, abundance_counts, relative_abundance)
+        (sid, asvid, patient_id, abundance_counts, relative_abundance)
     VALUES (%s,%s,%s,%s,%s)
 """
 rows = [
@@ -408,20 +410,21 @@ print(f"  Rel. abundance matched: {matched}/{total} rows "
 # =============================================================================
 # Section 5 — GenusAbundance (BMC)
 # =============================================================================
-# Source: rel-table-6.tsv
+# Source: rel-table-7.tsv
 # Format: rows = full QIIME2 taxonomy string, cols = sample IDs (hyphens)
-# Values: relative abundance (0.0–1.0) already collapsed to genus level
+# Values: relative abundance (0.0–1.0) collapsed to genus level (L7)
 #
-# Row index format:
-#   Bacteria;Bacteria;Proteobacteria;Gammaproteobacteria;...;Conservatibacter
-# Genus is the 7th semicolon-delimited token (index 6).
-# If that token is empty or unclassified, use the last non-empty token
-# and record at the appropriate level — but skip from GenusAbundance
-# (genus must be known for SIG matching).
+# Row index format (7 semicolon-delimited tokens, 0-based):
+#   Bacteria;Bacteria;Proteobacteria;Gammaproteobacteria;...;Pasteurellaceae;Conservatibacter
+#   0=kingdom 1=phylum 2=class 3=order 4=family 5=genus-label 6=genus
+# Genus is token at index 6. Rows where that token is empty (unclassified
+# at genus level) are skipped — genus must be known for SIG matching.
+#
+# Note: rel-table-6.tsv is the family-level (L6) collapse — do NOT use it here.
 
 print("\n── 5. BMC genus abundance ────────────────────────────────")
 
-# rel-table-6.tsv structure (verified from file):
+# rel-table-7.tsv structure:
 #   Line 0: "#OTU ID\tBUCCAL-004-000\t..."  <- real header, sample IDs as columns
 #   Line 1+: taxonomy_string\tvalue\t...    <- data rows
 #
@@ -429,7 +432,7 @@ print("\n── 5. BMC genus abundance ─────────────�
 # index_col=0. No skiprows needed. Rename index to "tax_string" for clarity.
 # Do NOT use comment="#" — it would skip this header line entirely.
 gt = pd.read_csv(
-    os.path.join(BMC_DIR, "rel-table-6.tsv"),
+    os.path.join(BMC_DIR, "rel-table-7.tsv"),
     sep="\t",
     index_col=0
 )
@@ -449,21 +452,16 @@ UNCLASSIFIED_GENERA = {
 
 def extract_genus_from_qiime2_string(tax_str):
     """
-    Parse genus from a QIIME2 semicolon-delimited taxonomy string.
+    Parse genus from a QIIME2 L7 semicolon-delimited taxonomy string.
     'Bacteria;Bacteria;Proteobacteria;...;Pasteurellaceae;Conservatibacter'
-    Level indices: 0=kingdom, 1=phylum, 2=class, 3=order, 4=family, 5=genus (L6)
+    Level indices: 0=kingdom, 1=phylum, 2=class, 3=order, 4=family, 5=family-label, 6=genus (L7)
     """
     parts = [p.strip() for p in str(tax_str).split(";")]
-    # L6 file: genus is at index 5 (0-based) after kingdom, phylum, class, order, family
-    if len(parts) >= 6:
-        genus = parts[5].strip()
-        if genus.lower() not in UNCLASSIFIED_GENERA:
+    # L7 file: genus is at index 6 (0-based)
+    if len(parts) >= 7:
+        genus = parts[6].strip()
+        if genus and genus.lower() not in UNCLASSIFIED_GENERA:
             return genus
-    # Fallback: walk right-to-left for last non-empty, non-unclassified token
-    for part in reversed(parts):
-        part = part.strip()
-        if part.lower() not in UNCLASSIFIED_GENERA:
-            return part
     return None
 
 genus_long["genus"] = genus_long["tax_string"].apply(extract_genus_from_qiime2_string)
@@ -486,7 +484,7 @@ if n_unmatched:
 
 sql = """
     INSERT IGNORE INTO GenusAbundance
-        (sid, bbid, genus, relative_abundance, data_source)
+        (sid, patient_id, genus, relative_abundance, data_source)
     VALUES (%s,%s,%s,%s,%s)
 """
 rows = [

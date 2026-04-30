@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS Patient;
 -- One row per individual.
 --
 -- patient_id:  namespaced surrogate PK
---              BMC patients:    "BMC_4"      (from integer bbid)
+--              BMC patients:    "BMC_4"      (from integer BIOBANK_ID in source CSV)
 --              Derosa patients: "NSCLC_10039" (from integer Patient_ID)
 --
 -- source_id:   VARCHAR — stores original ID string from source file.
@@ -171,15 +171,15 @@ CREATE TABLE Taxonomy (
 
 CREATE TABLE Sample (
     sid                 VARCHAR(60)                     NOT NULL,
-    bbid                VARCHAR(40)                     NOT NULL,
+    patient_id          VARCHAR(40)                     NOT NULL,
     sample_type         ENUM('buccal','stool','nasal')  NOT NULL,
     timepoint           VARCHAR(50)                     NOT NULL,
     sequencing_batch    DATE                            DEFAULT NULL,
     days_from_treatment INT                             DEFAULT NULL,
 
     PRIMARY KEY (sid),
-    FOREIGN KEY (bbid) REFERENCES Patient(patient_id),
-    INDEX idx_sample_bbid      (bbid),
+    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+    INDEX idx_sample_patient   (patient_id),
     INDEX idx_sample_type      (sample_type),
     INDEX idx_sample_timepoint (timepoint)
 );
@@ -204,15 +204,15 @@ CREATE TABLE Sample (
 CREATE TABLE Observation (
     sid                 VARCHAR(60)     NOT NULL,
     asvid               VARCHAR(64)     NOT NULL,
-    bbid                VARCHAR(40)     NOT NULL,
+    patient_id          VARCHAR(40)     NOT NULL,
     abundance_counts    INT             NOT NULL,
     relative_abundance  FLOAT           DEFAULT NULL,
 
     PRIMARY KEY (sid, asvid),
-    FOREIGN KEY (sid)   REFERENCES Sample(sid),
-    FOREIGN KEY (asvid) REFERENCES Taxonomy(asvid),
-    FOREIGN KEY (bbid)  REFERENCES Patient(patient_id),
-    INDEX idx_obs_bbid (bbid)
+    FOREIGN KEY (sid)        REFERENCES Sample(sid),
+    FOREIGN KEY (asvid)      REFERENCES Taxonomy(asvid),
+    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+    INDEX idx_obs_patient (patient_id)
 );
 
 
@@ -227,11 +227,10 @@ CREATE TABLE Observation (
 --   GenusAbundance PK (sid, genus) accommodates collapsed data cleanly.
 --
 -- BMC rows (data_source = 'BMC'):
---   Source: rel-table-6.tsv — QIIME2 taxa collapse at genus level (L6).
+--   Source: rel-table-7.tsv — QIIME2 taxa collapse at genus level (L7).
 --   Covers all BMC sample types (buccal, stool, nasal).
 --   Meta-analysis queries filter to sample_type = 'stool' via Sample JOIN.
---   Genus names: QIIME2 taxonomy strings with prefix stripped
---                ("g__Blautia" → "Blautia").
+--   Genus names: last token of the L7 semicolon-delimited taxonomy string.
 --
 -- Derosa rows (data_source = 'Derosa_NSCLC'):
 --   Source: met4_valid_complete.csv — MetaPhlAn 4.0 validation cohort data.
@@ -246,15 +245,15 @@ CREATE TABLE Observation (
 
 CREATE TABLE GenusAbundance (
     sid                 VARCHAR(60)     NOT NULL,
-    bbid                VARCHAR(40)     NOT NULL,
+    patient_id          VARCHAR(40)     NOT NULL,
     genus               VARCHAR(100)    NOT NULL,
     relative_abundance  FLOAT           NOT NULL,
     data_source         VARCHAR(20)     NOT NULL,
 
     PRIMARY KEY (sid, genus),
-    FOREIGN KEY (sid)  REFERENCES Sample(sid),
-    FOREIGN KEY (bbid) REFERENCES Patient(patient_id),
-    INDEX idx_ga_bbid   (bbid),
+    FOREIGN KEY (sid)        REFERENCES Sample(sid),
+    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+    INDEX idx_ga_patient   (patient_id),
     INDEX idx_ga_genus  (genus),
     INDEX idx_ga_source (data_source)
 );

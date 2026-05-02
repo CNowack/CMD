@@ -94,6 +94,9 @@
                 <span id="genus_label">Genus</span>
             </div>
         </div>
+        <div id="download-csv-container" style="display:none; margin: 15px 0; text-align: center;">
+            <button class="btn" onclick="downloadSankeyCSV()">⬇ Download Data as CSV</button>
+        </div>
     </div>
 {% endblock %}
 
@@ -173,6 +176,23 @@
             }
             $("#status_message").hide();
             drawSankey(data, filterType);
+
+            if (data.error) {
+                $("#status_message").text("Database error: " + data.error);
+                $("#download-csv-container").hide();
+                return;
+            }
+            if (!Array.isArray(data) || data.length === 0) {
+                $("#status_message").text("No taxonomy data found.");
+                $("#download-csv-container").hide();
+                return;
+            }
+            
+            currentSankeyData = data;
+            $("#download-csv-container").show();
+            
+            $("#status_message").hide();
+            drawSankey(data, filterType);
         }
 
         function drawSankey(rows, filterType) {
@@ -205,6 +225,31 @@
                 $("#rank_labels").removeClass("hidden");
             });
             chart.draw(dataTable, options);
+        }
+
+        function downloadSankeyCSV() {
+            if (!currentSankeyData || currentSankeyData.length === 0) return;
+            const lines = ['Source,Target,Count'];
+            currentSankeyData.forEach(function(row) {
+                const fields = row.map(function(val) {
+                    return '"' + String(val == null ? '' : val).replace(/"/g, '""') + '"';
+                });
+                lines.push(fields.join(','));
+            });
+
+            const csvContent = lines.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const filterType = $("#filter_type").val();
+            const filterValue = $("#filter_value").val().replace(/[^a-z0-9]/gi, '_');
+            const filename = `sankey_${filterType}_${filterValue}.csv`;
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 {% endblock %}

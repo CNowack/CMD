@@ -8,6 +8,11 @@ from flask import Flask, request, render_template, jsonify, abort
 import mariadb
 import os
 from dotenv import load_dotenv
+import mysql.connector
+
+load_dotenv()
+db_usr = os.environ.get("DB_USR")
+db_pw  = os.environ.get("DB_PW")
 
 app = Flask(__name__)
 
@@ -92,16 +97,8 @@ def api_sankey_data():
     params = (filter_value,) * stage_count_map[filter_type]
 
     connection, cursor = None, None
-    import mysql.connector
     try:
-        connection = mysql.connector.connect(
-            host="127.0.0.1",
-            user=db_usr,
-            password=db_pw,
-            database="Team13",
-            port=3307,
-            use_pure=True,
-        )
+        connection, cursor = get_db_connection()
         cursor = connection.cursor()
         cursor.execute(query, params)
         rows = cursor.fetchall()
@@ -115,24 +112,12 @@ def api_sankey_data():
 
 @app.route("/api/filter_options", methods=["GET"])
 def api_filter_options():
-    load_dotenv()
-    db_usr = os.environ.get("DB_USR")
-    db_pw  = os.environ.get("DB_PW")
 
     query = load_sql("sankey_dropdown_values.sql")
 
     connection, cursor = None, None
-    import mysql.connector
     try:
-        connection = mysql.connector.connect(
-            host="127.0.0.1", 
-            user=db_usr, 
-            password=db_pw,
-            database="Team13", 
-            port=3307, 
-            use_pure=True,
-        )
-        cursor = connection.cursor()
+        connection, cursor = get_db_connection()
         cursor.execute(query)
         rows = cursor.fetchall()
         options = {}
@@ -178,32 +163,40 @@ def api_cancer_diversity_search():
     params = []
 
     if cancer_type:
-        query += "AND p.cancer_type LIKE ? "
+        query += "AND p.cancer_type LIKE %s"
         params.append(f"%{cancer_type}%")
 
     if sample_type:
-        query += "AND s.sample_type = ? "
+        query += "AND s.sample_type = %s"
         params.append(sample_type)
 
     query += "GROUP BY p.patient_id, p.cancer_type, p.cancer_category, p.response_status, s.sample_type"
 
-    conn, cursor = get_db_connection()
-    cursor.execute(query, params)
-    rows = cursor.fetchall()
-    cursor.close()
-    conn.close()
+    connection, cursor = None, None
+    try:
+        connection, cursor = get_db_connection()
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        if cursor:     cursor.close()
+        if connection: connection.close()
     return jsonify([[row[0], row[1], row[2], row[3], row[4], row[5], row[6]] for row in rows])
 
 
 def get_db_connection():
     """Returns a (connection, cursor) pair. Caller is responsible for closing both."""
-    connection = mariadb.connect(
-        host="bioed-new.bu.edu",
-        user="jgsherry",
-        password="jgsherry",
-        db="Team13",
-        port=4253,
-    )
+    connection = mysql.connector.connect(
+            host="127.0.0.1", 
+            user=db_usr, 
+            password=db_pw,
+            database="Team13", 
+            port=3307, 
+            use_pure=True,
+        )
     connection.autocommit = False
     cursor = connection.cursor()
     return connection, cursor

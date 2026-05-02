@@ -47,6 +47,7 @@
         .rank-labels span { text-align: center; flex: 1; }
         .rank-labels.hidden { display: none; }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -96,6 +97,7 @@
         </div>
         <div id="download-csv-container" style="display:none; margin: 15px 0; text-align: center;">
             <button class="btn" onclick="downloadSankeyCSV()">⬇ Download Data as CSV</button>
+            <button class="btn" onclick="downloadSankeyImage()" style="margin-left: 10px;">🖼 Download Chart as Image</button>
         </div>
     </div>
 {% endblock %}
@@ -250,6 +252,29 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        function downloadSankeyImage() {
+            // Target the wrapper to include the rank labels in the screenshot
+            const targetElement = document.querySelector('.sankey-wrapper');
+            
+            html2canvas(targetElement).then(function(canvas) {
+                // Convert the canvas to a base64 png URL
+                const imgData = canvas.toDataURL("image/png");
+                
+                // Set up the dynamic filename
+                const filterType = $("#filter_type").val();
+                const filterValue = $("#filter_value").val().replace(/[^a-z0-9]/gi, '_');
+                const filename = `sankey_plot_${filterType}_${filterValue}.png`;
+                
+                // Create a temporary link to trigger the download
+                const a = document.createElement('a');
+                a.href = imgData;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
         }
     </script>
 {% endblock %}

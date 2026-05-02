@@ -7,7 +7,7 @@ UNION ALL
 
 SELECT 'treatment' AS filter_name, immunotherapy AS value
 FROM Patient
-WHERE immunotherapy IS NOT NULL
+WHERE immunotherapy IS NOT NULL and patient_id not like 'NSCLC%'
 GROUP BY immunotherapy
 
 UNION ALL

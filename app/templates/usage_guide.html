@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block title %}Usage Guide — CMD{% endblock %}
+
+{% block content %}
+    <h2>Usage Guide</h2>
+
+    <div class="panel">
+        <p>
+            This page explains how to use each section of the Cancer Microbiome
+            Database. Each analysis page has its own form with specific input
+            requirements documented below.
+        </p>
+    </div>
+
+    <h3>Shannon Diversity</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Computes per-patient microbial diversity from ASV relative
+        abundances. Results render as an interactive violin plot with individual data points.</p>
+
+        <p><strong>How to use:</strong></p>
+        <ol>
+            <li>Choose a cancer type from the dropdown (or <em>All</em>)</li>
+            <li>Choose a sample type: Buccal, Stool, or Nasal (or <em>All</em>)</li>
+            <li>Click <strong>Add</strong> — a chip appears and the violin is added to the plot</li>
+            <li>Repeat up to 5 combinations to compare side-by-side</li>
+            <li>Toggle between Shannon Index (H) and Simpson Index (D) with the index dropdown</li>
+            <li>Click <strong>Download Table as CSV</strong> to export the raw data</li>
+        </ol>
+
+        <p><strong>Example queries:</strong></p>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th style="padding: 6px 10px;">Cancer Type</th>
+                    <th style="padding: 6px 10px;">Sample Type</th>
+                    <th style="padding: 6px 10px;">Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 6px 10px;">Melanoma</td>
+                    <td style="padding: 6px 10px;">Stool</td>
+                    <td style="padding: 6px 10px;">How diverse are stool microbiomes in melanoma patients?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">NSCLC</td>
+                    <td style="padding: 6px 10px;">Buccal</td>
+                    <td style="padding: 6px 10px;">Is buccal diversity different in lung cancer vs. kidney cancer?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">Kidney Carcinoma</td>
+                    <td style="padding: 6px 10px;">Buccal</td>
+                    <td style="padding: 6px 10px;">(Add alongside NSCLC above to compare)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">All</td>
+                    <td style="padding: 6px 10px;">Stool</td>
+                    <td style="padding: 6px 10px;">What does the global stool diversity distribution look like?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">Breast Carcinoma</td>
+                    <td style="padding: 6px 10px;">Nasal</td>
+                    <td style="padding: 6px 10px;">Any signal in nasal microbiome for breast cancer?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Backend endpoint:</strong></p>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto;">GET /api/cancer_diversity_search?cancer_type=Melanoma&amp;sample_type=stool
+GET /api/cancer_diversity_search?cancer_type=&amp;sample_type=stool   ← all cancers
+GET /api/cancer_diversity_search?cancer_type=NSCLC&amp;sample_type=   ← all sample types</pre>
+    </div>
+
+    <h3>SIG1/SIG2 Microbiome Signature Search — Prevalence Meta-analysis</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Applies the SIG1/SIG2 framework from
+        <a href="https://www.cell.com/cell/fulltext/S0092-8674(24)00538-5" target="_blank" rel="noopener noreferrer">Derosa et al. (Cell, 2024)</a>
+        to the BMC cancer microbiome cohort. SIG1 genera are associated with gut dysbiosis and poor immunotherapy response;
+        SIG2 genera are associated with a healthy gut ecosystem and favorable outcomes. Results are shown as genus-level
+        prevalence (proportion of patients with detected relative abundance &gt; 0) across cancer categories or survival groups,
+        side-by-side with the Derosa NSCLC reference cohort.</p>
+
+        <p><strong>How to use:</strong></p>
+        <ol>
+            <li>Wait for the genus list to load, then check the genera you want to examine in the SIG1 and/or SIG2 panels (use the search box or <em>Select all</em> to narrow down)</li>
+            <li>Set analysis parameters:
+                <ul>
+                    <li><strong>Group by:</strong> Cancer Category or Overall Survival (OS&lt;12 vs OS≥12 months)</li>
+                    <li><strong>Timepoint:</strong> Baseline, Follow Up, Progression, or All</li>
+                    <li><strong>Sample type (BMC):</strong> Stool, Buccal, Nasal, or All — note the Derosa reference cohort is stool-only</li>
+                </ul>
+            </li>
+            <li>Click <strong>Run Analysis</strong> — violin plots appear for BMC (left) and Derosa NSCLC (right)</li>
+            <li>Use the <strong>Show</strong> radio buttons to display SIG1, SIG2, or both simultaneously</li>
+            <li>Check or uncheck cancer categories (or OS12 groups) to filter which groups appear on the charts</li>
+            <li>Toggle <strong>Hide genus with zero prevalence in all selected groups</strong> to declutter the charts</li>
+            <li>Click <strong>Show data tables</strong> under each chart section to expand the raw prevalence numbers</li>
+            <li>Click <strong>CSV</strong> next to any table to download that table's data</li>
+        </ol>
+
+        <p><strong>Example queries:</strong></p>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th style="padding: 6px 10px;">Genera</th>
+                    <th style="padding: 6px 10px;">Group by</th>
+                    <th style="padding: 6px 10px;">Sample Type</th>
+                    <th style="padding: 6px 10px;">Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 6px 10px;">All SIG1</td>
+                    <td style="padding: 6px 10px;">Cancer Category</td>
+                    <td style="padding: 6px 10px;">Stool</td>
+                    <td style="padding: 6px 10px;">Which dysbiosis-associated genera are most prevalent across cancer types?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">All SIG2</td>
+                    <td style="padding: 6px 10px;">Overall Survival</td>
+                    <td style="padding: 6px 10px;">Stool</td>
+                    <td style="padding: 6px 10px;">Are favorable-response genera more prevalent in OS≥12 patients?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">All SIG1 + SIG2</td>
+                    <td style="padding: 6px 10px;">Cancer Category</td>
+                    <td style="padding: 6px 10px;">Stool · Baseline</td>
+                    <td style="padding: 6px 10px;">How does the BMC cohort compare to the Derosa NSCLC reference across both signatures?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">All SIG1</td>
+                    <td style="padding: 6px 10px;">Cancer Category</td>
+                    <td style="padding: 6px 10px;">Buccal</td>
+                    <td style="padding: 6px 10px;">Is the SIG1 dysbiosis signal also present in buccal samples?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Important caveats:</strong> The BMC cohort used 16S rRNA amplicon sequencing; the Derosa cohort used
+        shotgun metagenomics. Detection sensitivity and taxonomic resolution differ between platforms — cross-cohort
+        comparisons should be interpreted with caution. This analysis is purely exploratory and hypothesis-generating.</p>
+    </div>
+
+    <h3>Taxonomic Sankey</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Visualizes the taxonomic composition of microbiome samples as an
+        interactive Sankey (flow) diagram. Abundance flows left to right through five taxonomic ranks:
+        Phylum → Class → Order → Family → Genus. The width of each flow is proportional to the number
+        of observations at that rank. Filtering by sample ID additionally shows the Genus level label.</p>
+
+        <p><strong>How to use:</strong></p>
+        <ol>
+            <li>Choose a <strong>Filter by</strong> type from the first dropdown:
+                <ul>
+                    <li><strong>Sample ID</strong> — a single sample; shows the full five-rank hierarchy down to Genus</li>
+                    <li><strong>Cancer type</strong> — aggregates all samples from patients with that cancer type</li>
+                    <li><strong>Treatment</strong> — aggregates all samples from patients on that treatment</li>
+                    <li><strong>Sample type</strong> — aggregates by collection method (Buccal, Stool, or Nasal)</li>
+                </ul>
+            </li>
+            <li>Choose a specific <strong>Value</strong> from the second dropdown (populated automatically based on filter type)</li>
+            <li>Click <strong>Render Sankey</strong> — the diagram draws below with rank labels along the bottom</li>
+            <li>Hover over any flow or node to see counts</li>
+        </ol>
+
+        <p><strong>Example queries:</strong></p>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th style="padding: 6px 10px;">Filter by</th>
+                    <th style="padding: 6px 10px;">Value</th>
+                    <th style="padding: 6px 10px;">Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 6px 10px;">Sample type</td>
+                    <td style="padding: 6px 10px;">Stool</td>
+                    <td style="padding: 6px 10px;">What is the overall taxonomic structure of all stool samples in the cohort?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">Cancer type</td>
+                    <td style="padding: 6px 10px;">Melanoma</td>
+                    <td style="padding: 6px 10px;">Which phyla and families dominate the microbiome of melanoma patients?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">Cancer type</td>
+                    <td style="padding: 6px 10px;">NSCLC</td>
+                    <td style="padding: 6px 10px;">How does NSCLC taxonomic composition compare to Melanoma?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">Sample type</td>
+                    <td style="padding: 6px 10px;">Buccal</td>
+                    <td style="padding: 6px 10px;">Does buccal microbiome composition differ structurally from stool?</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 10px;">Sample ID</td>
+                    <td style="padding: 6px 10px;">Any single SID</td>
+                    <td style="padding: 6px 10px;">What is the full genus-level taxonomy of one specific sample?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Backend endpoint:</strong></p>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto;">GET /api/sankey_data?filter_type=sample_type&amp;filter_value=stool
+GET /api/sankey_data?filter_type=cancer_type&amp;filter_value=Melanoma
+GET /api/sankey_data?filter_type=sid&amp;filter_value=&lt;sample_id&gt;</pre>
+    </div>
+
+    <h3>Metagenomic Analysis</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Explores taxonomic abundance across samples and groups.</p>
+        <p><strong>Input format:</strong> TBD</p>
+        <p><strong>Output:</strong> Abundance chart and taxonomy table.</p>
+    </div>
+
+    <h3>PCA</h3>
+    <div class="panel">
+        <p><strong>What it does:</strong> Dimensionality reduction of ASV abundance data.</p>
+        <p><strong>Input format:</strong> TBD</p>
+        <p><strong>Output:</strong> 2D scatter plot of samples colored by group.</p>
+    </div>
+{% endblock %}
